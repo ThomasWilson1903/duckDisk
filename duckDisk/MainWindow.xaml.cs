@@ -1,4 +1,5 @@
-﻿using System;
+﻿using duckDisk.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace duckDisk
         public MainWindow()
         {
             InitializeComponent();
+            new wdMainInterface().Show();
         }
     }
 }

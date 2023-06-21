@@ -19,9 +19,49 @@ namespace duckDisk.Windows
     /// </summary>
     public partial class wdMainInterface : Window
     {
+        public class dsa
+        {
+
+            string Name;
+
+            public string? imageTypeIcon;
+
+            public dsa(string name)
+            {
+                Name = name;
+               
+            }
+        }
+
+
         public wdMainInterface()
         {
             InitializeComponent();
+
+            List<dsa> listFile = new List<dsa>
+            {
+                new dsa("ds")
+                {
+
+                    imageTypeIcon = "\\Resources\\draft.jpg"
+                },
+                new dsa("dss")
+                {
+
+                    imageTypeIcon = "\\Resources\\folderIcon.png"
+                },
+                new dsa("dsw")
+                {
+
+                    imageTypeIcon = "\\Resources\\folderIcon.png"
+                }
+            };
+            lvMain.ItemsSource = listFile;
+        }
+
+        private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
