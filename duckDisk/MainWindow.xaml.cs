@@ -24,7 +24,8 @@ namespace duckDisk
         public MainWindow()
         {
             InitializeComponent();
-            new wdMainInterface().Show();
+            new wdMainInterface().ShowDialog();
+            Close();
         }
     }
 }

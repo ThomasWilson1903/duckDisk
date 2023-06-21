@@ -19,26 +19,37 @@
                 <Border.Background>
                     <SolidColorBrush Color="#D9D9D9" Opacity="0.7"/>
                 </Border.Background>
-                <ListView x:Name="lvMain">
-                    <ListView.Background>
-                        <SolidColorBrush Color="Transparent"/>
-                    </ListView.Background>
+
+                <ListView x:Name="lvMain" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Background="Transparent" Margin="10" BorderBrush="Transparent">
+
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                             <Setter Property="Margin"  Value="5"/>
                             <EventSetter Event='MouseDoubleClick' Handler='HandleDoubleClick'/>
                         </Style>
+
                     </ListView.ItemContainerStyle>
-                    
+
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Width="300" Height="300">
-                                <Border>
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding imageTypeIcon}"/>
-                                    </Border.Background>
-                                </Border>
+                                <StackPanel>
+                                    <Grid Height="150" 
+                                      Width="150">
+                                        <Image  Width="100" Height="100"
+                                            Source="{Binding imageTypeIcon}"/>
+                                    </Grid>
+                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" Margin=" 0 20 0 0 " FontSize="14" Foreground="#000000"/>
+                                </StackPanel>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

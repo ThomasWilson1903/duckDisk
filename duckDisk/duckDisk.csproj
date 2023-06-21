@@ -2,19 +2,17 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\draft.jpg" />
     <None Remove="Resources\FileIcon.png" />
     <None Remove="Resources\folderIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\draft.jpg" />
     <Resource Include="Resources\FileIcon.png" />
     <Resource Include="Resources\folderIcon.png" />
   </ItemGroup>

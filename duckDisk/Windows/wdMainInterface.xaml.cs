@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using Path = System.IO.Path;
 
 namespace duckDisk.Windows
 {
@@ -19,48 +22,87 @@ namespace duckDisk.Windows
     /// </summary>
     public partial class wdMainInterface : Window
     {
+
         public class dsa
         {
 
-            string Name;
+            public string Name { get; set; }
 
-            public string? imageTypeIcon;
+            public string? imageTypeIcon { get; set; }
 
-            public dsa(string name)
+            public bool dsas = false;
+
+            public string puthFile { get; set; }
+
+            public List<dsa>? dssa { get; set; }
+
+            public dsa(string name, string puth)
             {
                 Name = name;
-               
+                puthFile = puth;
+                if (Path.HasExtension(puth))
+                {
+                    imageTypeIcon = "\\Resources\\FileIcon.png";
+                   
+                }
+                else
+                {
+                    imageTypeIcon = "\\Resources\\folderIcon.png";
+                    dsas = true;
+                }
+
+
             }
         }
 
-
+        List<dsa> listFile;
         public wdMainInterface()
         {
             InitializeComponent();
 
-            List<dsa> listFile = new List<dsa>
+
+
+            listFile = new List<dsa>
             {
-                new dsa("ds")
+                new dsa("Папка", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\")
                 {
+                    dssa = new List<dsa>
+                    {
+                        new dsa("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                            {
 
-                    imageTypeIcon = "\\Resources\\draft.jpg"
+                            },
+                        new dsa("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                            {
+
+                            },
+                        new dsa("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                            {
+
+                            },
+                    }
                 },
-                new dsa("dss")
+                
+                new dsa("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
                 {
 
-                    imageTypeIcon = "\\Resources\\folderIcon.png"
                 },
-                new dsa("dsw")
-                {
 
-                    imageTypeIcon = "\\Resources\\folderIcon.png"
-                }
             };
+
             lvMain.ItemsSource = listFile;
         }
 
         private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (listFile[lvMain.SelectedIndex].dsas)
+            {
+                
+                    listFile = listFile[lvMain.SelectedIndex].dssa;
+                    lvMain.ItemsSource = listFile;
+            }
+            else
+                MessageBox.Show("Скачивания");
 
         }
     }

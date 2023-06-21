@@ -63,16 +63,6 @@ namespace duckDisk.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] draft {
-            get {
-                object obj = ResourceManager.GetObject("draft", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] FileIcon {
             get {
                 object obj = ResourceManager.GetObject("FileIcon", resourceCulture);
