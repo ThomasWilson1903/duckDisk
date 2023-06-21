@@ -23,7 +23,7 @@ namespace duckDisk.Windows
     public partial class wdMainInterface : Window
     {
 
-        public class dsa
+        public class ClassFile
         {
 
             public string Name { get; set; }
@@ -34,9 +34,9 @@ namespace duckDisk.Windows
 
             public string puthFile { get; set; }
 
-            public List<dsa>? dssa { get; set; }
+            public List<ClassFile>? dssa { get; set; }
 
-            public dsa(string name, string puth)
+            public ClassFile(string name, string puth)
             {
                 Name = name;
                 puthFile = puth;
@@ -55,35 +55,35 @@ namespace duckDisk.Windows
             }
         }
 
-        List<dsa> listFile;
+        List<ClassFile> listFile;
         public wdMainInterface()
         {
             InitializeComponent();
 
 
 
-            listFile = new List<dsa>
+            listFile = new List<ClassFile>
             {
-                new dsa("Папка", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\")
+                new ClassFile("Папка", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\")
                 {
-                    dssa = new List<dsa>
+                    dssa = new List<ClassFile>
                     {
-                        new dsa("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                        new ClassFile("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
                             {
 
                             },
-                        new dsa("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                        new ClassFile("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
                             {
 
                             },
-                        new dsa("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                        new ClassFile("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
                             {
 
                             },
                     }
                 },
                 
-                new dsa("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                new ClassFile("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
                 {
 
                 },
