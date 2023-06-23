@@ -22,6 +22,13 @@ namespace duckDisk.Windows
     /// </summary>
     public partial class wdMainInterface : Window
     {
+        /// <summary>
+        /// Back button
+        /// 
+        /// filtering by folder, photo, trash
+        /// 
+        /// </summary>
+
 
         public class ClassFile
         {
@@ -46,6 +53,7 @@ namespace duckDisk.Windows
                     string[] words = puth.Split(new char[] { '\\' });
 
                     Name = words.Last();
+
                 }
 
                 else
