@@ -36,14 +36,32 @@ namespace duckDisk.Windows
 
             public List<ClassFile>? dssa { get; set; }
 
-            public ClassFile(string name, string puth)
+            public ClassFile(int Number, string puth)
             {
-                Name = name;
+
+                string extension = Path.GetExtension(puth);
+
+                if (!string.IsNullOrEmpty(extension))
+                {
+                    string[] words = puth.Split(new char[] { '\\' });
+
+                    Name = words.Last();
+                }
+
+                else
+                {
+                    string[] words = puth.Split(new char[] { '\\' });
+                    Name = words[Number];
+                }
+
+
                 puthFile = puth;
+
+
                 if (Path.HasExtension(puth))
                 {
                     imageTypeIcon = "\\Resources\\FileIcon.png";
-                   
+
                 }
                 else
                 {
@@ -61,29 +79,28 @@ namespace duckDisk.Windows
             InitializeComponent();
 
 
-
             listFile = new List<ClassFile>
             {
-                new ClassFile("Папка", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\")
+                new ClassFile(1, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\")
                 {
                     dssa = new List<ClassFile>
                     {
-                        new ClassFile("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                        new ClassFile(2, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
                             {
 
                             },
-                        new ClassFile("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                        new ClassFile(2, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
                             {
 
                             },
-                        new ClassFile("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                        new ClassFile(2, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
                             {
 
                             },
                     }
                 },
-                
-                new ClassFile("Файл", "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+
+                new ClassFile(1, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.jpg")
                 {
 
                 },
@@ -97,9 +114,9 @@ namespace duckDisk.Windows
         {
             if (listFile[lvMain.SelectedIndex].dsas)
             {
-                
-                    listFile = listFile[lvMain.SelectedIndex].dssa;
-                    lvMain.ItemsSource = listFile;
+
+                listFile = listFile[lvMain.SelectedIndex].dssa;
+                lvMain.ItemsSource = listFile;
             }
             else
                 MessageBox.Show("Скачивания");
