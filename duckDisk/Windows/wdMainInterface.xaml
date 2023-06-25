@@ -5,56 +5,98 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:duckDisk.Windows"
         mc:Ignorable="d"
-        Title="duckDisk" Height="720" Width="1080" MinHeight="720" MinWidth="1080">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        FontSize="20"
+        Title="duckDisk" Height="720" 
+        Width="1080" MinHeight="720" MinWidth="1080">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Red"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="230*"/>
             <ColumnDefinition Width="850*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Background="#425559">
-
+            <StackPanel Margin="0 10 0 0">
+                <Button Click="clOpenImage">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Image"/>
+                            <TextBlock Text="Фото"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
+
             <Border Margin="30" CornerRadius="10" Padding="10">
                 <Border.Background>
                     <SolidColorBrush Color="#D9D9D9" Opacity="0.7"/>
                 </Border.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition Height="95*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="68*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Click="clBackEnd" VerticalAlignment="Center" HorizontalAlignment="Center" Height="32" Width="48">
+                            <Button.Content>
+                                <materialDesign:PackIcon Kind="ArrowBack"/>
+                            </Button.Content>
+                        </Button>
+                        <TextBlock x:Name="tbNavigation" Grid.Column="1" Text="dsad" VerticalAlignment="Center"/>
 
-                <ListView x:Name="lvMain" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    </Grid>
+                    <ListView Grid.Row="1" x:Name="lvMain" ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      Background="Transparent" Margin="10" BorderBrush="Transparent">
+                      Background="Transparent" Margin="10,10,10,10" BorderBrush="Transparent">
 
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                            <Setter Property="Margin"  Value="5"/>
-                            <EventSetter Event='MouseDoubleClick' Handler='HandleDoubleClick'/>
-                        </Style>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin"  Value="5"/>
+                                <EventSetter Event='MouseDoubleClick' Handler='HandleDoubleClick'/>
+                            </Style>
 
-                    </ListView.ItemContainerStyle>
+                        </ListView.ItemContainerStyle>
 
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
 
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Width="300" Height="300">
-                                <StackPanel>
-                                    <Grid Height="150" 
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="300" Height="300">
+                                    <StackPanel>
+                                        <Grid Height="150" 
                                       Width="150">
-                                        <Image  Width="100" Height="100"
+                                            <Image  Width="100" Height="100"
                                             Source="{Binding imageTypeIcon}"/>
-                                    </Grid>
-                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" Margin=" 0 20 0 0 " FontSize="14" Foreground="#000000"/>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                        </Grid>
+                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" Margin=" 0 20 0 0 " FontSize="14" Foreground="#000000"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
             </Border>
+
         </Grid>
 
     </Grid>

@@ -24,6 +24,7 @@ namespace duckDisk.Windows
     {
         /// <summary>
         /// Back button
+        /// create, upload button
         /// 
         /// filtering by folder, photo, trash
         /// 
@@ -43,7 +44,7 @@ namespace duckDisk.Windows
 
             public List<ClassFile>? dssa { get; set; }
 
-            public ClassFile(int Number, string puth)
+            public ClassFile( string puth)
             {
 
                 string extension = Path.GetExtension(puth);
@@ -59,7 +60,7 @@ namespace duckDisk.Windows
                 else
                 {
                     string[] words = puth.Split(new char[] { '\\' });
-                    Name = words[Number];
+                    Name = puth;
                 }
 
 
@@ -86,8 +87,87 @@ namespace duckDisk.Windows
         {
             InitializeComponent();
 
+            List<ClassFile> ds = new List<ClassFile>
+            {
 
-            listFile = new List<ClassFile>
+            };
+            // если папка существует
+            string dirName = "C:\\TestFile";
+            string[] dirs = Directory.GetFiles(dirName);
+            string[] dirss = Directory.GetDirectories(dirName);
+            int i = 0;
+            MessageBox.Show(dirs[0]);
+
+            foreach (string file in dirss)
+            {
+                var adas = new ClassFile(dirss[i])
+                {
+
+                };
+                ds.Add(adas);
+                i++;
+            }
+            i = 0;
+            foreach (string file in dirs)
+            {
+                var adas = new ClassFile(dirs[i])
+                {
+
+                };
+                ds.Add(adas);
+                i++;
+            }
+            
+            listFile = ds;
+            /*listFile = new List<ClassFile>
+            {
+                new ClassFile(1, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\")
+        {
+            dssa = new List<ClassFile>
+                    {
+                        new ClassFile(2, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                            {
+
+                            },
+                        new ClassFile(2, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                            {
+
+                            },
+                        new ClassFile(2, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
+                            {
+
+                            },
+                    }
+                },
+
+                new ClassFile(1, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.jpg")
+        {
+
+        },
+
+            };*/
+
+                string[] stringNavigation = listFile[0].puthFile.Split(new char[] { '\\' });
+            tbNavigation.Text = stringNavigation[0];
+            lvMain.ItemsSource = listFile;
+        }
+
+        private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (listFile[lvMain.SelectedIndex].dsas)
+            {
+
+                listFile = listFile[lvMain.SelectedIndex].dssa;
+                lvMain.ItemsSource = listFile;
+            }
+            else
+                MessageBox.Show("Скачивания");
+
+        }
+
+        private void clBackEnd(object sender, RoutedEventArgs e)
+        {
+            /*listFile = new List<ClassFile>
             {
                 new ClassFile(1, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\")
                 {
@@ -113,21 +193,12 @@ namespace duckDisk.Windows
 
                 },
 
-            };
-
+            };*/
             lvMain.ItemsSource = listFile;
         }
 
-        private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
+        private void clOpenImage(object sender, RoutedEventArgs e)
         {
-            if (listFile[lvMain.SelectedIndex].dsas)
-            {
-
-                listFile = listFile[lvMain.SelectedIndex].dssa;
-                lvMain.ItemsSource = listFile;
-            }
-            else
-                MessageBox.Show("Скачивания");
 
         }
     }
