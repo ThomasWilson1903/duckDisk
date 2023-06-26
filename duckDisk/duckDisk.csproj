@@ -8,8 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\AuthFon.png" />
     <None Remove="Resources\FileIcon.png" />
     <None Remove="Resources\folderIcon.png" />
+    <None Remove="Resources\Fon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,8 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\AuthFon.png" />
     <Resource Include="Resources\FileIcon.png" />
     <Resource Include="Resources\folderIcon.png" />
+    <Resource Include="Resources\Fon.png" />
   </ItemGroup>
 
   <ItemGroup>

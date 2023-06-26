@@ -63,6 +63,16 @@ namespace duckDisk.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] AuthFon {
+            get {
+                object obj = ResourceManager.GetObject("AuthFon", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] FileIcon {
             get {
                 object obj = ResourceManager.GetObject("FileIcon", resourceCulture);
@@ -76,6 +86,16 @@ namespace duckDisk.Properties {
         internal static byte[] folderIcon {
             get {
                 object obj = ResourceManager.GetObject("folderIcon", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Fon {
+            get {
+                object obj = ResourceManager.GetObject("Fon", resourceCulture);
                 return ((byte[])(obj));
             }
         }
