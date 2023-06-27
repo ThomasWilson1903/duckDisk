@@ -81,5 +81,23 @@ namespace duckDisk.data.api.user
 
             return result;
         }
+
+        public JwtResponseDto GetNewAccessToken(RefreshJwtRequestDto body)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{NetwokConstants.BASE_URL}/users/refresh")
+            {
+                Content = JsonContent.Create(body)
+            };
+
+            var response = httpClient.SendAsync(request).Result;
+
+            var json = response.Content.ReadAsStringAsync().Result;
+            var result = JsonConvert.DeserializeObject<JwtResponseDto>(json);
+
+            localStorage.Store("jwt_response", result);
+            localStorage.Dispose();
+
+            return result;
+        }
     }
 }
