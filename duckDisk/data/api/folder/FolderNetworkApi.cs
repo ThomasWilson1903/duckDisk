@@ -17,7 +17,7 @@ namespace duckDisk.data.api.folder
 
         public Paging<Folder> GetAll(int? folderId = null, int page = 1, int pageSize = 20)
         {
-            var builder = new UriBuilder("http://localhost:5000/api/Users");
+            var builder = new UriBuilder($"{NetwokConstants.BASE_URL}/folders");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["folder_id"] = folderId.ToString();
