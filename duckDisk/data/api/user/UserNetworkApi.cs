@@ -63,5 +63,23 @@ namespace duckDisk.data.api.user
 
             return result;
         }
+
+        public JwtResponseDto Register(JwtRequestDto body)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{NetwokConstants.BASE_URL}/users/register")
+            {
+                Content = JsonContent.Create(body)
+            };
+
+            var response = httpClient.SendAsync(request).Result;
+
+            var json = response.Content.ReadAsStringAsync().Result;
+            var result = JsonConvert.DeserializeObject<JwtResponseDto>(json);
+
+            localStorage.Store("jwt_response", result);
+            localStorage.Dispose();
+
+            return result;
+        }
     }
 }
