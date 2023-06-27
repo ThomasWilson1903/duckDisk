@@ -37,6 +37,7 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
+        <Image Source="/Resources/Fon.png" Stretch="Uniform" VerticalAlignment="Top"/>
 
             <Border Margin="30" CornerRadius="10" Padding="10">
                 <Border.Background>
