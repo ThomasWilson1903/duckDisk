@@ -93,7 +93,7 @@ namespace duckDisk.Windows
             //selectGetDirectories();
             FolderNetworkApi api = new FolderNetworkApi();
             api.Add(DateTime.Now.ToString());
-            var dsa = api.GetAll(null, 3, 20);
+            var dsa = api.GetAll();
             
             dgTest.ItemsSource = dsa.Content;
 
