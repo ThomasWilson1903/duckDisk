@@ -17,7 +17,7 @@ namespace duckDisk.data.api.folder
         private readonly HttpClient httpClient = new();
         private readonly LocalStorage localStorage = new();
 
-        public Paging<Folder> GetAll(int? folderId = null, int page = 1, int pageSize = 20)
+        public Paging<Folder> GetAll(int? folderId = null, int page = 0, int pageSize = 20)
         {
             var builder = new UriBuilder($"{NetwokConstants.BASE_URL}/folders");
 
