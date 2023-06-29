@@ -1,4 +1,5 @@
-﻿using duckDisk.Windows;
+﻿using duckDisk.data.api.user;
+using duckDisk.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +25,22 @@ namespace duckDisk
         public MainWindow()
         {
             InitializeComponent();
-            new wdMainInterface().ShowDialog();
-            Close();
+            
+        }
+
+        private void das(object sender, RoutedEventArgs e)
+        {
+            var UserApi = new UserNetworkApi();
+            var respons = UserApi.Login(new data.api.user.dto.JwtRequestDto { Email = tbLogin.Text, Password = pbPassword.Password });
+            if (respons.AccessToken != "")
+            {
+                new wdMainInterface().ShowDialog();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
         }
     }
 }

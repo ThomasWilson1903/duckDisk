@@ -1,4 +1,6 @@
-﻿using System;
+﻿using duckDisk.data.api.folder;
+using duckDisk.data.api.folder.model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -88,21 +90,18 @@ namespace duckDisk.Windows
         {
             InitializeComponent();
 
-            selectGetDirectories();
-            // если папка существует
-/*            string dirName = "C:\\TestFile";
-            string[] Files = Directory.GetFiles(dirName);
-            string[] dirss = Directory.GetDirectories(dirName);
-            MessageBox.Show(Files[0]);*/
-
+            //selectGetDirectories();
+            FolderNetworkApi api = new FolderNetworkApi();
+            api.Add(DateTime.Now.ToString());
+            var dsa = api.GetAll(null, 3, 20);
             
-            /*string[] stringNavigation = listFile[0].puthFile.Split(new char[] { '\\' });
-            tbNavigation.Text = stringNavigation[0];*/
+            dgTest.ItemsSource = dsa.Content;
+
         }
 
         void selectGetDirectories(string puth = "C:\\TestFile")
         {
-            if (!Path.HasExtension(puth))
+            /*if (!Path.HasExtension(puth))
             {
                 string[] Files = Directory.GetFiles(puth);
                 string[] dirss = Directory.GetDirectories(puth);
@@ -122,18 +121,18 @@ namespace duckDisk.Windows
             }
             else
                 return;
-            
+*/
 
         }
 
         private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (listFile[lvMain.SelectedIndex].dsas)
+            /*if (listFile[lvMain.SelectedIndex].dsas)
             {
                 selectGetDirectories(listFile[lvMain.SelectedIndex].puthFile);
             }
             else
-                MessageBox.Show("Скачивания");
+                MessageBox.Show("Скачивания");*/
 
         }
 
@@ -166,7 +165,7 @@ namespace duckDisk.Windows
                 },
 
             };*/
-            lvMain.ItemsSource = listFile;
+            //lvMain.ItemsSource = listFile;
         }
 
         private void clOpenImage(object sender, RoutedEventArgs e)
