@@ -37,11 +37,11 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
-        <Image Source="/Resources/Fon.png" Stretch="Uniform" VerticalAlignment="Top"/>
+            <Image Source="/Resources/Fon.png" Stretch="Uniform" VerticalAlignment="Top"/>
 
             <Border Margin="30" CornerRadius="10" Padding="10">
                 <Border.Background>
-                    <SolidColorBrush Color="#D9D9D9" Opacity="0.7"/>
+                    <SolidColorBrush Color="#D9D9D9" Opacity="0.8"/>
                 </Border.Background>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -53,13 +53,21 @@
                             <ColumnDefinition Width="9*"/>
                             <ColumnDefinition Width="68*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Click="clBackEnd" VerticalAlignment="Center" HorizontalAlignment="Center" Height="32" Width="48">
-                            <Button.Content>
-                                <materialDesign:PackIcon Kind="Home"/>
-                            </Button.Content>
-                        </Button>
-                        <TextBlock x:Name="tbNavigation" Grid.Column="1" Text="dsad" VerticalAlignment="Center"/>
-                        
+                        <StackPanel Orientation="Horizontal">
+                            <Button Click="clBackEnd" VerticalAlignment="Center" HorizontalAlignment="Center" Height="32" Width="48">
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Home"/>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                            <Border Grid.Column="1" VerticalAlignment="Center" CornerRadius="7" Padding="7">
+                                <Border.Background>
+                                    <SolidColorBrush Color="#FFFFFF"/>
+                                </Border.Background>
+                                <TextBlock x:Name="tbNavigation" Text="dsad" VerticalAlignment="Center"/>
+                            </Border>
+
+
                     </Grid>
                     <ListView Grid.Row="1" x:Name="lvMain" ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
