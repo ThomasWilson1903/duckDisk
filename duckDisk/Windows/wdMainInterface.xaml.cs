@@ -38,25 +38,31 @@ namespace duckDisk.Windows
 
         public class ClassFile
         {
+            public int Id { get; set; }
 
             public string Name { get; set; }
 
             public string? imageTypeIcon { get; set; }
+            
+            public Boolean FileInFolder { get; set; }
+
 
             public ClassFile(Folder? folder, FileModel? fileModels)
             {
                 if (folder != null)
                 {
+                    Id = folder.Id;
                     Name = folder.Name;
                     imageTypeIcon = "\\Resources\\folderIcon.png";
+                    FileInFolder = true;
 
                 }
                 else
                 {
-
+                    Id = fileModels.Id;
                     Name = fileModels.Name;
                     imageTypeIcon = "\\Resources\\FileIcon.png";
-
+                    FileInFolder = false;
 
                 }
 
@@ -78,7 +84,7 @@ namespace duckDisk.Windows
             }
         }
 
-        List<ClassFile> listFile;
+        List<ClassFile> classFiles = new List<ClassFile>();
         public wdMainInterface()
         {
             InitializeComponent();
@@ -89,7 +95,7 @@ namespace duckDisk.Windows
 
             var dsa = api.GetAll();
 
-            List<ClassFile> classFiles = new List<ClassFile>();
+            
             foreach (Folder fils in dsa.Content)
             {
                 var itemAdd = new ClassFile(fils, null);
@@ -123,7 +129,12 @@ namespace duckDisk.Windows
 
         private void MenuItemDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            if (lvMain.SelectedItems != null) return;
+            if (classFiles[lvMain.SelectedIndex].FileInFolder)
+            {
+                FolderNetworkApi api = new FolderNetworkApi();
+                api.
+            }
         }
     }
 }
