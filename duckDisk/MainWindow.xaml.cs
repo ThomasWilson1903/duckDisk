@@ -25,7 +25,7 @@ namespace duckDisk
         public MainWindow()
         {
             InitializeComponent();
-
+            tbLogin.Focus();
         }
 
         private void das(object sender, RoutedEventArgs e)

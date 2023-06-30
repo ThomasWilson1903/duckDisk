@@ -66,8 +66,9 @@
                       Background="Transparent" Margin="10,10,10,10" BorderBrush="Transparent">
 
                         <ListBox.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Delete" Click="MenuItemDelete_Click"/>
+                            <ContextMenu Style="{StaticResource MaterialDesignContextMenu}">
+                                <MenuItem Header="Удалить" Click="MenuItemDelete_Click"/>
+                                <Button Content="dqw" Click="dsa"/>
                             </ContextMenu>
                         </ListBox.ContextMenu>
 

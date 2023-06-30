@@ -43,7 +43,7 @@ namespace duckDisk.Windows
             public string Name { get; set; }
 
             public string? imageTypeIcon { get; set; }
-            
+
             public Boolean FileInFolder { get; set; }
 
 
@@ -95,7 +95,7 @@ namespace duckDisk.Windows
 
             var dsa = api.GetAll();
 
-            
+
             foreach (Folder fils in dsa.Content)
             {
                 var itemAdd = new ClassFile(fils, null);
@@ -129,12 +129,20 @@ namespace duckDisk.Windows
 
         private void MenuItemDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (lvMain.SelectedItems != null) return;
+            var del = classFiles[lvMain.SelectedIndex];
+            if (lvMain.SelectedIndex == -1) return;
             if (classFiles[lvMain.SelectedIndex].FileInFolder)
             {
                 FolderNetworkApi api = new FolderNetworkApi();
-                api.
+                MessageBox.Show($"{del.Name}");
             }
+        }
+
+        private void dsa(object sender, RoutedEventArgs e)
+        {
+            var del = (sender as ContextMenu).DataContext as ClassFile;
+            MessageBox.Show($"{del.Name}");
+
         }
     }
 }
