@@ -1,4 +1,6 @@
-﻿using duckDisk.data.api.folder;
+﻿using duckDisk.data.api.file;
+using duckDisk.data.api.file.model;
+using duckDisk.data.api.folder;
 using duckDisk.data.api.folder.model;
 using System;
 using System.Collections.Generic;
@@ -41,36 +43,27 @@ namespace duckDisk.Windows
 
             public string? imageTypeIcon { get; set; }
 
-            public bool dsas = false;
-
-            public string puthFile { get; set; }
-
-            public List<ClassFile>? dssa { get; set; }
-
-            public ClassFile(string puth)
+            public ClassFile(Folder? folder, FileModel? fileModels)
             {
-
-                string extension = Path.GetExtension(puth);
-
-                if (!string.IsNullOrEmpty(extension))
+                if (folder != null)
                 {
-                    string[] words = puth.Split(new char[] { '\\' });
-
-                    Name = words.Last();
+                    Name = folder.Name;
+                    imageTypeIcon = "\\Resources\\folderIcon.png";
 
                 }
-
                 else
                 {
-                    string[] words = puth.Split(new char[] { '\\' });
-                    Name = puth;
+
+                    Name = fileModels.Name;
+                    imageTypeIcon = "\\Resources\\FileIcon.png";
+
+
                 }
 
 
-                puthFile = puth;
 
 
-                if (Path.HasExtension(puth))
+                /*if (Path.HasExtension(puth))
                 {
                     imageTypeIcon = "\\Resources\\FileIcon.png";
 
@@ -79,7 +72,7 @@ namespace duckDisk.Windows
                 {
                     imageTypeIcon = "\\Resources\\folderIcon.png";
                     dsas = true;
-                }
+                }*/
 
 
             }
@@ -92,80 +85,35 @@ namespace duckDisk.Windows
 
             //selectGetDirectories();
             FolderNetworkApi api = new FolderNetworkApi();
+            FileNetworkApi FilsApi = new FileNetworkApi();
             api.Add(DateTime.Now.ToString());
             var dsa = api.GetAll();
-            
-            dgTest.ItemsSource = dsa.Content;
 
-        }
-
-        void selectGetDirectories(string puth = "C:\\TestFile")
-        {
-            /*if (!Path.HasExtension(puth))
+            List<ClassFile> classFiles = new List<ClassFile>();
+            /*foreach (Folder fils in dsa.Content)
             {
-                string[] Files = Directory.GetFiles(puth);
-                string[] dirss = Directory.GetDirectories(puth);
-                List<ClassFile> ds = new List<ClassFile>();
-                foreach (string file in dirss)
-                {
-                    var adas = new ClassFile(file);
-                    ds.Add(adas);
-                }
-                foreach (string file in Files)
-                {
-                    var adas = new ClassFile(file);
-                    ds.Add(adas);
-                }
-                listFile = ds;
-                lvMain.ItemsSource = listFile;
-            }
-            else
-                return;
-*/
+                var itemAdd = new ClassFile(fils,null);
+                classFiles.Add(itemAdd);
+            }*/
 
+            var listFils = FilsApi.GetAll();
+            foreach (FileModel fileModel in listFils.Content)
+            {
+                var itemAdd = new ClassFile(null, fileModel);
+                classFiles.Add(itemAdd);
+            }
+
+            dgTest.ItemsSource = classFiles;
         }
 
         private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            /*if (listFile[lvMain.SelectedIndex].dsas)
-            {
-                selectGetDirectories(listFile[lvMain.SelectedIndex].puthFile);
-            }
-            else
-                MessageBox.Show("Скачивания");*/
-
+            
         }
 
         private void clBackEnd(object sender, RoutedEventArgs e)
         {
-            /*listFile = new List<ClassFile>
-            {
-                new ClassFile(1, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\")
-                {
-                    dssa = new List<ClassFile>
-                    {
-                        new ClassFile(2, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
-                            {
-
-                            },
-                        new ClassFile(2, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
-                            {
-
-                            },
-                        new ClassFile(2, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.png")
-                            {
-
-                            },
-                    }
-                },
-
-                new ClassFile(1, "C:\\Users\\hdnhd\\source\\repos\\duckDisk\\duckDisk\\Resources\\FileIcon.jpg")
-                {
-
-                },
-
-            };*/
-            //lvMain.ItemsSource = listFile;
+            
         }
 
         private void clOpenImage(object sender, RoutedEventArgs e)

@@ -1,6 +1,6 @@
 ﻿namespace duckDisk.data.api.user.model
 {
-    enum UserRole
+    public enum UserRole
     {
         BASE_USER,
         ADMIN

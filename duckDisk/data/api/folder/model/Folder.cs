@@ -3,7 +3,7 @@ using System;
 
 namespace duckDisk.data.api.folder.model
 {
-    internal class Folder
+    public class Folder
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
