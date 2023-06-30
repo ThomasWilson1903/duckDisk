@@ -59,12 +59,17 @@
                             </Button.Content>
                         </Button>
                         <TextBlock x:Name="tbNavigation" Grid.Column="1" Text="dsad" VerticalAlignment="Center"/>
-
+                        
                     </Grid>
-                    <!--
                     <ListView Grid.Row="1" x:Name="lvMain" ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       Background="Transparent" Margin="10,10,10,10" BorderBrush="Transparent">
+
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Delete" Click="MenuItemDelete_Click"/>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
 
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
@@ -96,10 +101,8 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    -->
-                    <DataGrid x:Name="dgTest" Grid.Row="1">
-                        
-                    </DataGrid>
+
+
                 </Grid>
             </Border>
 

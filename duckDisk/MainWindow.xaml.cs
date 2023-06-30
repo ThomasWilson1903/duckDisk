@@ -25,10 +25,15 @@ namespace duckDisk
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
 
         private void das(object sender, RoutedEventArgs e)
+        {
+            EnterSystem();
+        }
+
+        void EnterSystem()
         {
             var UserApi = new UserNetworkApi();
             var respons = UserApi.Login(new data.api.user.dto.JwtRequestDto { Email = tbLogin.Text, Password = pbPassword.Password });
@@ -39,7 +44,14 @@ namespace duckDisk
             }
             else
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("проверьте логин или пароль", "Ошибка ввода данный");
+            }
+        }
+        private void pbKeyEnter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                EnterSystem();
             }
         }
     }

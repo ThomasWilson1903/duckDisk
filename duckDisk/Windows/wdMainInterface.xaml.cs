@@ -86,15 +86,15 @@ namespace duckDisk.Windows
             //selectGetDirectories();
             FolderNetworkApi api = new FolderNetworkApi();
             FileNetworkApi FilsApi = new FileNetworkApi();
-            api.Add(DateTime.Now.ToString());
+
             var dsa = api.GetAll();
 
             List<ClassFile> classFiles = new List<ClassFile>();
-            /*foreach (Folder fils in dsa.Content)
+            foreach (Folder fils in dsa.Content)
             {
-                var itemAdd = new ClassFile(fils,null);
+                var itemAdd = new ClassFile(fils, null);
                 classFiles.Add(itemAdd);
-            }*/
+            }
 
             var listFils = FilsApi.GetAll();
             foreach (FileModel fileModel in listFils.Content)
@@ -103,20 +103,25 @@ namespace duckDisk.Windows
                 classFiles.Add(itemAdd);
             }
 
-            dgTest.ItemsSource = classFiles;
+            lvMain.ItemsSource = classFiles;
         }
 
         private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+
         }
 
         private void clBackEnd(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void clOpenImage(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemDelete_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -25,7 +25,7 @@
         <StackPanel VerticalAlignment="Center">
             <TextBox x:Name="tbLogin" materialDesign:HintAssist.Hint="Login"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-            <PasswordBox x:Name="pbPassword" materialDesign:HintAssist.Hint="Password"
+            <PasswordBox x:Name="pbPassword" materialDesign:HintAssist.Hint="Password" KeyDown="pbKeyEnter"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
             <Button Content="das" Height="50" Click="das"/>
         </StackPanel>
