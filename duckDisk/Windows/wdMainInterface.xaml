@@ -55,7 +55,7 @@
                         </Grid.ColumnDefinitions>
                         <Button Click="clBackEnd" VerticalAlignment="Center" HorizontalAlignment="Center" Height="32" Width="48">
                             <Button.Content>
-                                <materialDesign:PackIcon Kind="ArrowBack"/>
+                                <materialDesign:PackIcon Kind="Home"/>
                             </Button.Content>
                         </Button>
                         <TextBlock x:Name="tbNavigation" Grid.Column="1" Text="dsad" VerticalAlignment="Center"/>

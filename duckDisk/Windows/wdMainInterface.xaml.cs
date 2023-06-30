@@ -65,22 +65,6 @@ namespace duckDisk.Windows
                     FileInFolder = false;
 
                 }
-
-
-
-
-                /*if (Path.HasExtension(puth))
-                {
-                    imageTypeIcon = "\\Resources\\FileIcon.png";
-
-                }
-                else
-                {
-                    imageTypeIcon = "\\Resources\\folderIcon.png";
-                    dsas = true;
-                }*/
-
-
             }
         }
 
@@ -88,12 +72,23 @@ namespace duckDisk.Windows
         public wdMainInterface()
         {
             InitializeComponent();
+            selectFolder();
+        }
+        void selectFolder(int? folder = null)
+        {
+            if (folder != null)
+            {
+                tbNavigation.Text = $"home/.../{classFiles[lvMain.SelectedIndex].Name}";
+            }
+            else
+                tbNavigation.Text = $"home/.../";
 
-            //selectGetDirectories();
+            lvMain.ItemsSource = null;
+            classFiles.Clear();
             FolderNetworkApi api = new FolderNetworkApi();
             FileNetworkApi FilsApi = new FileNetworkApi();
 
-            var dsa = api.GetAll();
+            var dsa = api.GetAll(folder);
 
 
             foreach (Folder fils in dsa.Content)
@@ -102,7 +97,7 @@ namespace duckDisk.Windows
                 classFiles.Add(itemAdd);
             }
 
-            var listFils = FilsApi.GetAll();
+            var listFils = FilsApi.GetAll(folder);
             foreach (FileModel fileModel in listFils.Content)
             {
                 var itemAdd = new ClassFile(null, fileModel);
@@ -110,16 +105,28 @@ namespace duckDisk.Windows
             }
 
             lvMain.ItemsSource = classFiles;
+
+            
+
         }
+        
 
         private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            if (lvMain.SelectedIndex != -1)
+            {
+                if (classFiles[lvMain.SelectedIndex].FileInFolder)
+                {
+                    selectFolder(classFiles[lvMain.SelectedIndex].Id);
+                }
+                else
+                    MessageBox.Show("download");
+            }
         }
 
         private void clBackEnd(object sender, RoutedEventArgs e)
         {
-
+            selectFolder();
         }
 
         private void clOpenImage(object sender, RoutedEventArgs e)
@@ -130,18 +137,18 @@ namespace duckDisk.Windows
         private void MenuItemDelete_Click(object sender, RoutedEventArgs e)
         {
             var del = classFiles[lvMain.SelectedIndex];
-            if (lvMain.SelectedIndex == -1) return;
-            if (classFiles[lvMain.SelectedIndex].FileInFolder)
+            if (del != null)
             {
-                FolderNetworkApi api = new FolderNetworkApi();
-                MessageBox.Show($"{del.Name}");
+                if (MessageBox.Show($"{del.Name} удалить?", "Удалить", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+
+                }
             }
         }
 
         private void dsa(object sender, RoutedEventArgs e)
         {
-            var del = (sender as ContextMenu).DataContext as ClassFile;
-            MessageBox.Show($"{del.Name}");
+
 
         }
     }

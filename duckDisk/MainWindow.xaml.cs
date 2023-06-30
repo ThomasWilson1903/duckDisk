@@ -26,6 +26,8 @@ namespace duckDisk
         {
             InitializeComponent();
             tbLogin.Focus();
+            tbLogin.Text = "string";
+            pbPassword.Password = "string";
         }
 
         private void das(object sender, RoutedEventArgs e)
