@@ -105,10 +105,12 @@ namespace duckDisk.Windows
             }
 
             lvMain.ItemsSource = classFiles;
+
             if (folder != null)
             {
                 BackIndex = folder.Value;
             }
+
         }
         int BackIndex;
 
