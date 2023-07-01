@@ -53,7 +53,7 @@ namespace duckDisk.Windows
                 {
                     Id = folder.Id;
                     Name = folder.Name;
-                    imageTypeIcon = "\\Resources\\folderIcon.png";
+                    imageTypeIcon = folder.getIcon();
                     FileInFolder = true;
 
                 }

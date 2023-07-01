@@ -12,5 +12,14 @@ namespace duckDisk.data.api.folder.model
         public DateTime DateCreate { get; set; }
         public Boolean IsPublic { get; set; }
         public User User { get; set; } = new();
+
+        //Не обращаться, когда не надо
+        //TODO: Сделать гетер
+        private string imageTypeIcon = "\\Resources\\folderIcon.png";
+
+        public string getIcon()
+        {
+            return imageTypeIcon;
+        }
     }
 }
