@@ -47,7 +47,7 @@ namespace duckDisk.Windows
             public Boolean FileInFolder { get; set; }
 
 
-            public ClassFile(Folder? folder, FileModel? fileModels)
+            public ClassFile(FolderModel? folder, FileModel? fileModels)
             {
                 if (folder != null)
                 {
@@ -91,7 +91,7 @@ namespace duckDisk.Windows
             var dsa = api.GetAll(folder);
 
 
-            foreach (Folder fils in dsa.Content)
+            foreach (FolderModel fils in dsa.Content)
             {
                 var itemAdd = new ClassFile(fils, null);
                 classFiles.Add(itemAdd);
