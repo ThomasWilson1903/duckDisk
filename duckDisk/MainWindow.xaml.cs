@@ -1,4 +1,5 @@
 ﻿using duckDisk.data.api.user;
+using duckDisk.Pages.wdAuthAndRegisterMain;
 using duckDisk.Windows;
 using System;
 using System.Collections.Generic;
@@ -25,45 +26,23 @@ namespace duckDisk
         public MainWindow()
         {
             InitializeComponent();
-            tbLogin.Focus();
-            tbLogin.Text = "string";
-            pbPassword.Password = "string";
+            frMainAuthAndRegister.Navigate(new pgAuth());
+
         }
 
-        private void das(object sender, RoutedEventArgs e)
+        private void clOpenPageAuth(object sender, RoutedEventArgs e)
         {
-            EnterSystem();
+            frMainAuthAndRegister.Navigate(new pgAuth());
+            btOpenAyth.BorderThickness = new Thickness(0, 0, 0, 2);
+            btOpenRegister.BorderThickness = new Thickness(0, 0, 0, 0);
         }
 
-        void EnterSystem()
+        private void clOpenPageRegister(object sender, RoutedEventArgs e)
         {
-            var UserApi = new UserNetworkApi();
-            var respons = UserApi.Login(new data.api.user.dto.JwtRequestDto { Email = tbLogin.Text, Password = pbPassword.Password });
+            frMainAuthAndRegister.Navigate(new pgRegister());
+            btOpenRegister.BorderThickness = new Thickness(0, 0, 0, 2);
+            btOpenAyth.BorderThickness = new Thickness(0, 0, 0, 0);
 
-            if (respons.AccessToken != "")
-            {
-                Hide();
-                var openWd = new wdMainInterface();
-                openWd.ShowDialog();
-                if (openWd.checkLev)
-                {
-
-                }
-                else
-                    UserApi.SignOut();
-                    Close();
-            }
-            else
-            {
-                MessageBox.Show("проверьте логин или пароль", "Ошибка ввода данный");
-            }
-        }
-        private void pbKeyEnter(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                EnterSystem();
-            }
         }
     }
 }

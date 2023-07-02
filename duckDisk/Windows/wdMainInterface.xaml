@@ -36,7 +36,7 @@
                 </Button>
             </StackPanel>
 
-            <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 10" >
+            <Button VerticalAlignment="Bottom" Click="clExitSystem" HorizontalAlignment="Left" Margin="10 10" >
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ExitToApp"/>

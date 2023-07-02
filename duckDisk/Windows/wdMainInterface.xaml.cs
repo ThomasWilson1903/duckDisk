@@ -183,5 +183,11 @@ namespace duckDisk.Windows
             api.Add(fileDialog.FileName, fileDialog.SafeFileName, buffer, selectFolder);
 
         }
+
+        private void clExitSystem(object sender, RoutedEventArgs e)
+        {
+            checkLev = true;
+            Close();
+        }
     }
 }
