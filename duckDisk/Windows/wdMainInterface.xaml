@@ -97,7 +97,6 @@
                         <ListBox.ContextMenu>
                             <ContextMenu Style="{StaticResource MaterialDesignContextMenu}">
                                 <MenuItem Header="Удалить" Click="MenuItemDelete_Click"/>
-                                <Button Content="dqw" Click="dsa"/>
                             </ContextMenu>
                         </ListBox.ContextMenu>
 
