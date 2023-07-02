@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using Path = System.IO.Path;
+using System.IO.Compression;
 
 namespace duckDisk.Windows
 {
@@ -176,6 +177,7 @@ namespace duckDisk.Windows
             fileDialog.ShowDialog();
 
             var api = new FileNetworkApi();
+
             byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
 
             api.Add(fileDialog.FileName, fileDialog.SafeFileName, buffer, selectFolder);

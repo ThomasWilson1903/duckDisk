@@ -35,6 +35,15 @@
                     </Button.Content>
                 </Button>
             </StackPanel>
+
+            <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 10" >
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ExitToApp"/>
+                        <TextBlock Text="Выход"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
         </Grid>
         <Grid Grid.Column="1">
             <Image Source="/Resources/Fon.png" Stretch="Uniform" VerticalAlignment="Top"/>
