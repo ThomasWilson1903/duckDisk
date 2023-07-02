@@ -39,10 +39,19 @@ namespace duckDisk
         {
             var UserApi = new UserNetworkApi();
             var respons = UserApi.Login(new data.api.user.dto.JwtRequestDto { Email = tbLogin.Text, Password = pbPassword.Password });
+
             if (respons.AccessToken != "")
             {
-                new wdMainInterface().ShowDialog();
-                Close();
+                Hide();
+                var openWd = new wdMainInterface();
+                openWd.ShowDialog();
+                if (openWd.checkLev)
+                {
+
+                }
+                else
+                    UserApi.SignOut();
+                    Close();
             }
             else
             {

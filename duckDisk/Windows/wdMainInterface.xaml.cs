@@ -2,6 +2,7 @@
 using duckDisk.data.api.file.model;
 using duckDisk.data.api.folder;
 using duckDisk.data.api.folder.model;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,6 +37,8 @@ namespace duckDisk.Windows
         /// </summary>
 
 
+
+
         public class ClassFile
         {
             public int Id { get; set; }
@@ -68,17 +71,34 @@ namespace duckDisk.Windows
             }
         }
 
+        public bool checkLev = false;
+
         List<ClassFile> classFiles = new List<ClassFile>();
         public wdMainInterface()
         {
             InitializeComponent();
-            selectFolder();
+            ShowSelectFolder();
         }
-        void selectFolder(int? folder = null)
+
+        int? selectFolder = null;
+
+        string? selectFolderName = null;
+
+        void ShowSelectFolder(int? folder = null)
         {
             if (folder != null)
             {
-                tbNavigation.Text = $"home/.../{classFiles[lvMain.SelectedIndex].Name}";
+                selectFolder = folder;
+            }
+
+            if (lvMain.SelectedIndex != -1)
+            {
+                selectFolderName = classFiles[lvMain.SelectedIndex].Name;
+            }
+
+            if (folder != null)
+            {
+                tbNavigation.Text = $"home/.../{selectFolderName}";
             }
             else
                 tbNavigation.Text = $"home/.../";
@@ -105,14 +125,7 @@ namespace duckDisk.Windows
             }
 
             lvMain.ItemsSource = classFiles;
-
-            if (folder != null)
-            {
-                BackIndex = folder.Value;
-            }
-
         }
-        int BackIndex;
 
         private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -120,7 +133,7 @@ namespace duckDisk.Windows
             {
                 if (classFiles[lvMain.SelectedIndex].FileInFolder)
                 {
-                    selectFolder(classFiles[lvMain.SelectedIndex].Id);
+                    ShowSelectFolder(classFiles[lvMain.SelectedIndex].Id);
                 }
                 else
                     MessageBox.Show("download");
@@ -129,7 +142,7 @@ namespace duckDisk.Windows
 
         private void clBackEnd(object sender, RoutedEventArgs e)
         {
-            selectFolder();
+            ShowSelectFolder();
         }
 
         private void clOpenImage(object sender, RoutedEventArgs e)
@@ -152,6 +165,20 @@ namespace duckDisk.Windows
         private void dsa(object sender, RoutedEventArgs e)
         {
 
+
+        }
+
+        private void clAddFile(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.DefaultExt = ".txt"; // Required file extension 
+            fileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"; // Optional file extensions
+            fileDialog.ShowDialog();
+
+            var api = new FileNetworkApi();
+            byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
+
+            api.Add(fileDialog.FileName, fileDialog.SafeFileName, buffer, selectFolder);
 
         }
     }

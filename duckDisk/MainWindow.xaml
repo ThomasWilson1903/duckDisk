@@ -5,29 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:duckDisk"
         mc:Ignorable="d"
-        Title="Авторизация" Height="450" Width="800"
+        Title="Авторизация" Height="500" Width="600" MinHeight="500" MinWidth="600"
         FontSize="20"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Red"/>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Indigo"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="289*"/>
-            <RowDefinition Height="145*"/>
-        </Grid.RowDefinitions>
-        <StackPanel VerticalAlignment="Center">
-            <TextBox x:Name="tbLogin" materialDesign:HintAssist.Hint="Login" 
+        <Grid.Background >
+            <ImageBrush ImageSource="\Resources\fonAuth.jpg" Stretch="UniformToFill" AlignmentX="Center"/>
+        </Grid.Background>
+
+        
+
+        <Grid Margin="150 30" MaxWidth="400" MaxHeight="600">
+            <Grid.Background>
+                <SolidColorBrush Color="#FFFFFF" Opacity="0.6"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="158*"/>
+                <RowDefinition Height="49*"/>
+                <RowDefinition Height="193*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="DiskDuck" FontSize="42" HorizontalAlignment="Center"/>
+                <TextBlock Text="Начинай пользоваться уже сейчас." FontSize="16"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Background="Transparent" materialDesign:ButtonAssist.CornerRadius="0" BorderThickness="0 0 0 2">
+                    <Button.Content>
+                        <StackPanel>
+                            <TextBlock Text="Вход" FontSize="16"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Margin="15 0 0 0" Background="Transparent" materialDesign:ButtonAssist.CornerRadius="0" BorderThickness="0 0 0 0"
+                        >
+                    <Button.Content>
+                        <StackPanel>
+                            <TextBlock Text="Регистрация" FontSize="16"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <StackPanel Margin="5,0,5,0" Grid.Row="2" VerticalAlignment="Center" Height="176">
+                <TextBox x:Name="tbLogin" materialDesign:HintAssist.Hint="Login" 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-            <PasswordBox x:Name="pbPassword" materialDesign:HintAssist.Hint="Password" KeyDown="pbKeyEnter"
+                <PasswordBox x:Name="pbPassword" materialDesign:HintAssist.Hint="Password" KeyDown="pbKeyEnter"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
-            <Button Content="das" Height="50" Click="das"/>
-        </StackPanel>
+                <Button Content="das" Height="50" Click="das" Margin="0 15 0 0"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

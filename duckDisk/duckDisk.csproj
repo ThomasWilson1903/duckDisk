@@ -12,6 +12,7 @@
     <None Remove="Resources\FileIcon.png" />
     <None Remove="Resources\folderIcon.png" />
     <None Remove="Resources\Fon.png" />
+    <None Remove="Resources\fonAuth.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,7 @@
     <Resource Include="Resources\FileIcon.png" />
     <Resource Include="Resources\folderIcon.png" />
     <Resource Include="Resources\Fon.png" />
+    <Resource Include="Resources\fonAuth.jpg" />
   </ItemGroup>
 
   <ItemGroup>

@@ -99,5 +99,15 @@ namespace duckDisk.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] fonAuth {
+            get {
+                object obj = ResourceManager.GetObject("fonAuth", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

@@ -50,22 +50,34 @@
                     </Grid.RowDefinitions>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="9*"/>
-                            <ColumnDefinition Width="68*"/>
+                            <ColumnDefinition Width="77*"/>
+                            <ColumnDefinition Width="552*"/>
+                            <ColumnDefinition Width="141*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <Button Click="clBackEnd" VerticalAlignment="Center" HorizontalAlignment="Center" Height="32" Width="48">
+                        <StackPanel VerticalAlignment="Center">
+                            <Button Click="clBackEnd" VerticalAlignment="Center" materialDesign:ButtonAssist.CornerRadius="7" Height="35" HorizontalAlignment="Center">
                                 <Button.Content>
                                     <materialDesign:PackIcon Kind="Home"/>
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                            <Border Grid.Column="1" VerticalAlignment="Center" CornerRadius="7" Padding="7">
-                                <Border.Background>
-                                    <SolidColorBrush Color="#FFFFFF"/>
-                                </Border.Background>
-                                <TextBlock x:Name="tbNavigation" Text="dsad" VerticalAlignment="Center"/>
-                            </Border>
+
+                        <Border Grid.Column="1" VerticalAlignment="Center" CornerRadius="7"  Padding="5" Height="35" Margin="5">
+                            <Border.Background>
+                                <SolidColorBrush Color="#FFFFFF"/>
+                            </Border.Background>
+                            <TextBlock x:Name="tbNavigation" Text="dsad" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="2" materialDesign:ButtonAssist.CornerRadius="7" VerticalAlignment="Center" Margin="5">
+                            <Button Click="clAddFile">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Add"/>
+                                        <TextBlock Text="Добавить"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
 
 
                     </Grid>
