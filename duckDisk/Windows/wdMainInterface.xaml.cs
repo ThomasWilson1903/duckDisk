@@ -153,11 +153,11 @@ namespace duckDisk.Windows
 
         }
 
-        
+
         private void MenuItemDelete_Click(object sender, RoutedEventArgs e)
         {
             var del = classFiles[lvMain.SelectedIndex];
-            
+
             if (del != null)
             {
                 if (MessageBox.Show($"{del.Name} удалить?", "Удалить", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -194,10 +194,12 @@ namespace duckDisk.Windows
             fileDialog.ShowDialog();
 
             var api = new FileNetworkApi();
+            if (fileDialog != null)
+            {
+                byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
+                api.Add(fileDialog.FileName, fileDialog.SafeFileName, buffer, selectFolder);
+            }
 
-            byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
-
-            api.Add(fileDialog.FileName, fileDialog.SafeFileName, buffer, selectFolder);
 
         }
 
