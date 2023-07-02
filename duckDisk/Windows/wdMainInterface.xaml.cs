@@ -21,6 +21,8 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using Path = System.IO.Path;
 using System.IO.Compression;
+using System.Threading;
+using MaterialDesignThemes.Wpf;
 
 namespace duckDisk.Windows
 {
@@ -151,16 +153,31 @@ namespace duckDisk.Windows
 
         }
 
+        
         private void MenuItemDelete_Click(object sender, RoutedEventArgs e)
         {
             var del = classFiles[lvMain.SelectedIndex];
+            
             if (del != null)
             {
                 if (MessageBox.Show($"{del.Name} удалить?", "Удалить", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
+                    if (del.FileInFolder)
+                    {
 
+                        var api = new FolderNetworkApi();
+                        api.Delete(del.Id);
+                        ShowSelectFolder(selectFolder);
+                    }
+                    else
+                    {
+                        var api = new FileNetworkApi();
+                        api.Delete(del.Id);
+                        ShowSelectFolder(selectFolder);
+                    }
                 }
             }
+
         }
 
         private void dsa(object sender, RoutedEventArgs e)
