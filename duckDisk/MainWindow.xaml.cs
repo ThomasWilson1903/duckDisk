@@ -26,17 +26,20 @@ namespace duckDisk
         public MainWindow()
         {
             InitializeComponent();
-            frMainAuthAndRegister.Navigate(new pgAuth());
-
+            openAuth();
         }
 
         private void clOpenPageAuth(object sender, RoutedEventArgs e)
+        {
+            openAuth();
+        }
+
+        public void openAuth()
         {
             frMainAuthAndRegister.Navigate(new pgAuth());
             btOpenAyth.BorderThickness = new Thickness(0, 0, 0, 2);
             btOpenRegister.BorderThickness = new Thickness(0, 0, 0, 0);
         }
-
         private void clOpenPageRegister(object sender, RoutedEventArgs e)
         {
             frMainAuthAndRegister.Navigate(new pgRegister());

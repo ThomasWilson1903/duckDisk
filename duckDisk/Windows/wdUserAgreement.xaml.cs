@@ -21,6 +21,8 @@ namespace duckDisk.Windows
     /// </summary>
     public partial class wdUserAgreement : Window
     {
+        public bool checkContinue = false;
+
         public wdUserAgreement()
         {
             InitializeComponent();
@@ -40,5 +42,15 @@ namespace duckDisk.Windows
 
         }
 
+        private void clContinue(object sender, RoutedEventArgs e)
+        {
+            checkContinue = true;
+            Close();
+        }
+
+        private void clRefusal(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

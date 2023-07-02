@@ -28,7 +28,7 @@
 
             <PasswordBox x:Name="pbPasswordRepeat" materialDesign:HintAssist.Hint="Password" KeyDown="pbKeyEnter"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
-            <CheckBox Content="Пользовательское соглашения" Checked="chUserAgreement"  FontSize="14" Margin="0 5"/>
+            <CheckBox x:Name="cbUserAgreement" Content="Пользовательское соглашения" Checked="chUserAgreement"  FontSize="14" Margin="0 5"/>
 
             <Button Content="das" Height="50" Click="clAuthEnterSystem" Margin="0 15 0 0"/>
         </StackPanel>

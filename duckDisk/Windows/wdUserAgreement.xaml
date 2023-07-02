@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:duckDisk.Windows"
         mc:Ignorable="d" FontSize="16"
-        Title="Пользовательское соглашения" Height="450" Width="800">
-    <Grid>
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    
+        Title="Пользовательское соглашения" Height="450" Width="800"
+        MinHeight="450" MinWidth="800">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Red"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="377*"/>
+            <RowDefinition Height="57*"/>
+        </Grid.RowDefinitions>
         <ListBox x:Name="lbTextString"/>
+
+        <StackPanel Orientation="Horizontal" Margin="5 0 0 0" Grid.Row="1" 
+                    HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button Click="clContinue">
+                <Button.Content>
+                    <TextBlock Text="Согласен"/>
+                </Button.Content>
+            </Button>
+            <Button Click="clRefusal" Margin="5 0 5 0" Style="{StaticResource MaterialDesignFlatAccentButton}">
+                <Button.Content>
+                    <TextBlock Text="Не согласен"/>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+        
+        
     </Grid>
 </Window>
