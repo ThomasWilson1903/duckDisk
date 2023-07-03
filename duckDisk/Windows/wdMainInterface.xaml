@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         FontSize="20"
-        Title="duckDisk" Height="720" 
+        Title="duckDisk" Height="720"
         Width="1080" MinHeight="720" MinWidth="1080">
 
     <Window.Resources>
@@ -24,6 +24,8 @@
             <ColumnDefinition Width="230*"/>
             <ColumnDefinition Width="850*"/>
         </Grid.ColumnDefinitions>
+
+        
         <Grid Grid.Column="0" Background="#425559">
             <StackPanel Margin="0 10 0 0">
                 <Button Click="clOpenImage">
@@ -96,6 +98,9 @@
 
                         <ListBox.ContextMenu>
                             <ContextMenu Style="{StaticResource MaterialDesignContextMenu}">
+                                <MenuItem Header="Создать">
+                                    <MenuItem Header="Папку" Click="MenuItemCreate_Click"/>
+                                </MenuItem>
                                 <MenuItem Header="Удалить" Click="MenuItemDelete_Click"/>
                             </ContextMenu>
                         </ListBox.ContextMenu>

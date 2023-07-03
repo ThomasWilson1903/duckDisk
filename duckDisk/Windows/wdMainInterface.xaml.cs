@@ -23,6 +23,7 @@ using Path = System.IO.Path;
 using System.IO.Compression;
 using System.Threading;
 using MaterialDesignThemes.Wpf;
+using duckDisk.Windows.wdCreateItem;
 
 namespace duckDisk.Windows
 {
@@ -156,28 +157,30 @@ namespace duckDisk.Windows
 
         private void MenuItemDelete_Click(object sender, RoutedEventArgs e)
         {
-            var del = classFiles[lvMain.SelectedIndex];
-
-            if (del != null)
+            if (lvMain.SelectedIndex != -1)
             {
-                if (MessageBox.Show($"{del.Name} удалить?", "Удалить", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    if (del.FileInFolder)
-                    {
+                var del = classFiles[lvMain.SelectedIndex];
 
-                        var api = new FolderNetworkApi();
-                        api.Delete(del.Id);
-                        ShowSelectFolder(selectFolder);
-                    }
-                    else
+                if (del != null)
+                {
+                    if (MessageBox.Show($"{del.Name} удалить?", "Удалить", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        var api = new FileNetworkApi();
-                        api.Delete(del.Id);
-                        ShowSelectFolder(selectFolder);
+                        if (del.FileInFolder)
+                        {
+
+                            var api = new FolderNetworkApi();
+                            api.Delete(del.Id);
+                            ShowSelectFolder(selectFolder);
+                        }
+                        else
+                        {
+                            var api = new FileNetworkApi();
+                            api.Delete(del.Id);
+                            ShowSelectFolder(selectFolder);
+                        }
                     }
                 }
             }
-
         }
 
         private void dsa(object sender, RoutedEventArgs e)
@@ -207,6 +210,52 @@ namespace duckDisk.Windows
         {
             checkLev = true;
             Close();
+        }
+
+        /// <summary>
+        /// Apply Blur Effect on the window
+        /// </summary>
+        /// <param name=”win”></param>
+        private void ApplyEffect(Window win)
+        {
+            System.Windows.Media.Effects.BlurEffect objBlur = new System.Windows.Media.Effects.BlurEffect();
+            objBlur.Radius = 4;
+            win.Effect = objBlur;
+        }
+
+        /// <summary>
+        /// Remove Blur Effects
+        /// </summary>
+        /// <param name=”win”></param>
+        private void ClearEffect(Window win)
+        {
+            win.Effect = null;
+        }
+
+        private void MenuItemCreate_Click(object sender, RoutedEventArgs e)
+        {
+            wdCreateFolder newWindow = new wdCreateFolder(selectFolder);  // Создание нового экземпляра окна
+
+            // Установка родительского окна для нового окна
+            newWindow.Owner = this;
+
+            // Расчет координат центра родительского окна
+            double parentWindowLeft = this.Left;
+            double parentWindowTop = this.Top;
+            double parentWindowWidth = this.Width;
+            double parentWindowHeight = this.Height;
+            double newWindowLeft = parentWindowLeft + (parentWindowWidth - newWindow.Width) / 2;
+            double newWindowTop = parentWindowTop + (parentWindowHeight - newWindow.Height) / 2;
+
+            // Установка координат центра нового окна
+            newWindow.Left = newWindowLeft;
+            newWindow.Top = newWindowTop;
+            ApplyEffect(this);
+            // Открытие нового окна
+            newWindow.ShowDialog();
+
+            ClearEffect(this);
+            ShowSelectFolder(selectFolder);
         }
     }
 }
