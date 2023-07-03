@@ -197,7 +197,7 @@ namespace duckDisk.Windows
             if (fileDialog != null)
             {
                 byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
-                api.Add(fileDialog.FileName, fileDialog.SafeFileName, buffer, selectFolder);
+                api.Add(fileDialog.SafeFileName, buffer, selectFolder);
             }
 
 

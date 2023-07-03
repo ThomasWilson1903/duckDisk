@@ -38,7 +38,7 @@ namespace duckDisk.data.api.file
             return JsonConvert.DeserializeObject<Paging<FileModel>>(json);
         }
 
-        public FileModel Add(string fileName, string name, byte[] file, int? folderId = null)
+        public FileModel Add(string name, byte[] file, int? folderId = null)
         {
             var token = localStorage.Get<JwtResponseDto>("jwt_response").AccessToken;
 
@@ -53,21 +53,12 @@ namespace duckDisk.data.api.file
             var requestContent = new MultipartFormDataContent();
             var fileContent = new ByteArrayContent(file);
 
-            requestContent.Add(fileContent, "file", "file");
+            requestContent.Add(fileContent, "file", name);
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
 
             var response = httpClient.PostAsync(url, requestContent).Result;
 
             var json = response.Content.ReadAsStringAsync().Result;
-
-            Trace.WriteLine("text");
-            Trace.WriteLine("text");
-            Trace.WriteLine("text");
-            Trace.WriteLine("text");
-            Trace.WriteLine(file.Length);
-            Trace.WriteLine("text");
-            Trace.WriteLine("text");
-            Trace.WriteLine("text");
 
             return JsonConvert.DeserializeObject<FileModel>(json);
         }
