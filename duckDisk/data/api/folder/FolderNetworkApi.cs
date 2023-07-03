@@ -131,5 +131,29 @@ namespace duckDisk.data.api.folder
 
             return JsonConvert.DeserializeObject<FolderModel>(json);
         }
+
+        public FolderModel Rename(int folderId, string newName)
+        {
+            var token = localStorage.Get<JwtResponseDto>("jwt_response").AccessToken;
+
+            var builder = new UriBuilder($"{NetwokConstants.BASE_URL}/folders/rename");
+
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query["folder_id"] = folderId.ToString();
+            query["file_name"] = newName.ToString();
+            builder.Query = query.ToString();
+
+            var url = builder.ToString();
+
+            var request = new HttpRequestMessage(HttpMethod.Patch, url);
+
+            request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {token}");
+
+            var reponse = httpClient.SendAsync(request).Result;
+
+            var json = reponse.Content.ReadAsStringAsync().Result;
+
+            return JsonConvert.DeserializeObject<FolderModel>(json);
+        }
     }
 }
