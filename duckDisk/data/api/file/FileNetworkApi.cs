@@ -4,6 +4,7 @@ using duckDisk.data.api.user.dto;
 using Hanssens.Net;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -41,15 +42,32 @@ namespace duckDisk.data.api.file
         {
             var token = localStorage.Get<JwtResponseDto>("jwt_response").AccessToken;
 
+            var builder = new UriBuilder($"{NetwokConstants.BASE_URL}/files");
+
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query["folder_id"] = folderId.ToString();
+            builder.Query = query.ToString();
+
+            var url = builder.ToString();
+
             var requestContent = new MultipartFormDataContent();
             var fileContent = new ByteArrayContent(file);
 
-            requestContent.Add(fileContent, name, fileName);
+            requestContent.Add(fileContent, "file", "file");
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
 
-            var response = httpClient.PatchAsync($"{NetwokConstants.BASE_URL}/files", requestContent).Result;
+            var response = httpClient.PostAsync(url, requestContent).Result;
 
             var json = response.Content.ReadAsStringAsync().Result;
+
+            Trace.WriteLine("text");
+            Trace.WriteLine("text");
+            Trace.WriteLine("text");
+            Trace.WriteLine("text");
+            Trace.WriteLine(file.Length);
+            Trace.WriteLine("text");
+            Trace.WriteLine("text");
+            Trace.WriteLine("text");
 
             return JsonConvert.DeserializeObject<FileModel>(json);
         }
