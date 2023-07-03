@@ -202,7 +202,7 @@ namespace duckDisk.Windows
                 byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
                 api.Add(fileDialog.SafeFileName, buffer, selectFolder);
             }
-
+            ShowSelectFolder(selectFolder);
 
         }
 

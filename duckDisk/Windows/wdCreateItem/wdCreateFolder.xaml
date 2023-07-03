@@ -30,7 +30,7 @@
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" Margin="30 50 30 0">
-                <TextBox x:Name="tbNameFolder" Text="dq" Background="#FFFFFF"  
+                <TextBox x:Name="tbNameFolder" Text="dq" Background="#FFFFFF" KeyDown="kdCreatFolder" 
                              BorderThickness="2" Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                 <Button x:Name="btSave" Click="clSaveEdit" Margin="0 35 0 0" Width="130" HorizontalAlignment="Right" >
                     <Button.Content>
