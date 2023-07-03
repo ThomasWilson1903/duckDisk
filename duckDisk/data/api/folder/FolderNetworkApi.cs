@@ -21,6 +21,8 @@ namespace duckDisk.data.api.folder
 
         public Paging<FolderModel> GetAll(int? folderId = null, int page = 0, int pageSize = 20)
         {
+            var token = localStorage.Get<JwtResponseDto>("jwt_response").AccessToken;
+
             var builder = new UriBuilder($"{NetwokConstants.BASE_URL}/folders");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
@@ -32,6 +34,8 @@ namespace duckDisk.data.api.folder
             var url = builder.ToString();
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {token}");
 
             var response = httpClient.SendAsync(request).Result;
 

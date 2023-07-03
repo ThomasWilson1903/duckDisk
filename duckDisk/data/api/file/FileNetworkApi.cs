@@ -3,6 +3,7 @@ using duckDisk.data.api.folder.model;
 using duckDisk.data.api.user.dto;
 using Hanssens.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace duckDisk.data.api.file
 
         public Paging<FileModel> GetAll(int? folderId = null, int page = 0, int pageSize = 20)
         {
+            var token = localStorage.Get<JwtResponseDto>("jwt_response").AccessToken;
+
             var builder = new UriBuilder($"{NetwokConstants.BASE_URL}/files");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
@@ -30,6 +33,8 @@ namespace duckDisk.data.api.file
             var url = builder.ToString();
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {token}");
 
             var response = httpClient.SendAsync(request).Result;
 
