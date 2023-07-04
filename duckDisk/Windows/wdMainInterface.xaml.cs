@@ -234,7 +234,14 @@ namespace duckDisk.Windows
 
         private void MenuItemCreate_Click(object sender, RoutedEventArgs e)
         {
-            wdCreateFolder newWindow = new wdCreateFolder(selectFolder);  // Создание нового экземпляра окна
+            new FolderNetworkApi().Add(showWdCreatfolder(), selectFolder);
+
+            ShowSelectFolder(selectFolder);
+        }
+
+        string showWdCreatfolder(string? classFile = "", bool FileInFolder = true)
+        {
+            wdCreateFolder newWindow = new wdCreateFolder(classFile, FileInFolder);  // Создание нового экземпляра окна
 
             // Установка родительского окна для нового окна
             newWindow.Owner = this;
@@ -252,10 +259,41 @@ namespace duckDisk.Windows
             newWindow.Top = newWindowTop;
             ApplyEffect(this);
             // Открытие нового окна
+
+
             newWindow.ShowDialog();
 
+
             ClearEffect(this);
-            ShowSelectFolder(selectFolder);
+            return newWindow.returnString;
+        }
+
+        private void MenuItemRename_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvMain.SelectedIndex != -1)
+            {
+                var rename = classFiles[lvMain.SelectedIndex];
+                if (rename.FileInFolder)
+                {
+                    var stringName = showWdCreatfolder(rename.Name);
+                    if (stringName != null)
+                    {
+                        new FolderNetworkApi().Rename(classFiles[lvMain.SelectedIndex].Id, stringName);
+                        ShowSelectFolder(selectFolder);
+                    }
+                }
+                else
+                {
+                    var stringName = showWdCreatfolder(rename.Name, false);
+                    if (stringName != null)
+                    {
+                        new FileNetworkApi().Rename(classFiles[lvMain.SelectedIndex].Id, stringName);
+                        ShowSelectFolder(selectFolder);
+                    }
+                }
+
+
+            }
         }
     }
 }

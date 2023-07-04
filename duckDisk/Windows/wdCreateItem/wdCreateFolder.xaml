@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:duckDisk.Windows.wdCreateItem"
         mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterOwner"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Background="Transparent"
-        Title="wdCreateFolder" Height="200" Width="400" WindowStyle="None" AllowsTransparency="True">
+        Title="wdCreateFolder" Height="290" Width="450" WindowStyle="None" AllowsTransparency="True">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -17,14 +17,17 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Border CornerRadius="10" BorderThickness="2">
+    <Border CornerRadius="10" BorderThickness="2" Margin="50">
         <Border.Background>
-            <SolidColorBrush Color="#566D73"/>
+            <SolidColorBrush Color="#FFFFFF"/>
         </Border.Background>
-
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="30"/>
+        </Border.Effect>
         <Grid Background="Transparent">
             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Folder" Height="150" Width="150" Foreground="#FFD464"/>
+                <materialDesign:PackIcon x:Name="iconFolder" Kind="Folder"  Height="150" Width="150" Foreground="#FFD464"/>
+                <materialDesign:PackIcon x:Name="iconFile" Kind="File" Visibility="Collapsed" Height="150" Width="150" Foreground="#566D73"/>
                 
             <TextBlock Text="Укажите название папки" Margin="15" Foreground="#FFFFFF"/>
             </StackPanel>

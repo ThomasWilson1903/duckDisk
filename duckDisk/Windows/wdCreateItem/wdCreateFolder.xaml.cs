@@ -20,12 +20,25 @@ namespace duckDisk.Windows.wdCreateItem
     /// </summary>
     public partial class wdCreateFolder : Window
     {
-        int? Folder;
-        public wdCreateFolder(int? folder)
+        string? Folder;
+        public string returnString;
+        public wdCreateFolder(string? NameFolder, bool FileInFolder = true)
         {
-            Folder = folder;
+            Folder = NameFolder;
             InitializeComponent();
             tbNameFolder.Focus();
+            tbNameFolder.Text = Folder;
+            if (FileInFolder)
+            {
+                iconFolder.Visibility = Visibility.Visible;
+                iconFile.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                iconFile.Visibility = Visibility.Visible;
+                iconFolder.Visibility = Visibility.Collapsed;
+            }
+
         }
 
         private void clSaveEdit(object sender, RoutedEventArgs e)
@@ -38,7 +51,7 @@ namespace duckDisk.Windows.wdCreateItem
             var api = new FolderNetworkApi();
             if (tbNameFolder.Text != "")
             {
-                api.Add(tbNameFolder.Text, Folder);
+                returnString = tbNameFolder.Text;
             }
             else
                 tbNameFolder.BorderBrush = Brushes.Red;
