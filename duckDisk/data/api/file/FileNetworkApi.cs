@@ -91,7 +91,7 @@ namespace duckDisk.data.api.file
         {
             var token = localStorage.Get<JwtResponseDto>("jwt_response").AccessToken;
 
-            var builder = new UriBuilder($"{NetwokConstants.BASE_URL}/files");
+            var builder = new UriBuilder($"{NetwokConstants.BASE_URL}/files/rename");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["file_id"] = filerId.ToString();

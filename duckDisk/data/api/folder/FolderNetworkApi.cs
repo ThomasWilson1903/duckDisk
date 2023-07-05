@@ -140,7 +140,7 @@ namespace duckDisk.data.api.folder
 
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["folder_id"] = folderId.ToString();
-            query["file_name"] = newName.ToString();
+            query["name"] = newName.ToString();
             builder.Query = query.ToString();
 
             var url = builder.ToString();
