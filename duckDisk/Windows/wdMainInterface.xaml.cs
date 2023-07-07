@@ -2,28 +2,16 @@
 using duckDisk.data.api.file.model;
 using duckDisk.data.api.folder;
 using duckDisk.data.api.folder.model;
+using duckDisk.Windows.wdCreateItem;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
-using Path = System.IO.Path;
-using System.IO.Compression;
+using System.Net;
 using System.Threading;
-using MaterialDesignThemes.Wpf;
-using duckDisk.Windows.wdCreateItem;
+using System.Windows;
+using System.Windows.Input;
 
 namespace duckDisk.Windows
 {
@@ -53,6 +41,8 @@ namespace duckDisk.Windows
 
             public Boolean FileInFolder { get; set; }
 
+            public string UriString { get; set; } 
+
 
             public ClassFile(FolderModel? folder, FileModel? fileModels)
             {
@@ -70,7 +60,7 @@ namespace duckDisk.Windows
                     Name = fileModels.Name;
                     imageTypeIcon = "\\Resources\\FileIcon.png";
                     FileInFolder = false;
-
+                    UriString = fileModels.Url;
                 }
             }
         }
@@ -293,6 +283,33 @@ namespace duckDisk.Windows
                 }
 
 
+            }
+        }
+
+        private void MenuItemDowload_Click(object sender, RoutedEventArgs e)
+        {
+            string parameter = "Hello, World!";
+
+            SaveFileDialog folderBrowserDialog1 = new SaveFileDialog();
+
+            if (folderBrowserDialog1.ShowDialog() == true)
+            {
+
+                MessageBox.Show(folderBrowserDialog1.FileName);
+            }
+
+            Thread thread = new Thread(() =>
+            {
+                DownloadFile(classFiles[lvMain.SelectedIndex].UriString, );
+            });
+            thread.Start();
+        }
+
+        public void DownloadFile(string url, string destinationPath)
+        {
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(url, destinationPath);
             }
         }
     }

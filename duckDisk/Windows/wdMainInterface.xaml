@@ -101,6 +101,7 @@
                                 <MenuItem Header="Создать">
                                     <MenuItem Header="Папку" Click="MenuItemCreate_Click"/>
                                 </MenuItem>
+                                <MenuItem Header="Скачать" Click="MenuItemDowload_Click"/>
                                 <MenuItem Header="Переименовать" Click="MenuItemRename_Click"/>
                                 <MenuItem Header="Удалить" Click="MenuItemDelete_Click"/>
                             </ContextMenu>
