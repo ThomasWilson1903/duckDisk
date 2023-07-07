@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -306,6 +307,7 @@ namespace duckDisk.Windows
 
             string UriString = classFiles[lvMain.SelectedIndex].UriString;
             string puthFileSave = folderBrowserDialog1.FileName;
+                MessageBox.Show(UriString);
             Thread thread = new Thread(() =>
             {
 
@@ -313,14 +315,39 @@ namespace duckDisk.Windows
 
             });
             thread.Start();
-            
+
         }
 
         public void DownloadFile(string url, string destinationPath)
         {
             using (WebClient client = new WebClient())
             {
-                client.DownloadFile(url, destinationPath);
+                if (FileExists(url))
+                {
+                    client.DownloadFile(url, destinationPath);
+                }
+                else
+                {
+                    MessageBox.Show("Файл отсутствует на сервере или возникают другие ошибки.", "Error");
+                }
+            }
+        }
+        public static bool FileExists(string url)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "HEAD";
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    return response.StatusCode == HttpStatusCode.OK;
+                }
+            }
+            catch (WebException)
+            {
+                // Обработка исключения, если нет связи с сервером или возникают другие ошибки
+                return false;
             }
         }
     }
