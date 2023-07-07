@@ -41,7 +41,9 @@ namespace duckDisk.Windows
 
             public Boolean FileInFolder { get; set; }
 
-            public string UriString { get; set; } 
+            public string UriString { get; set; }
+
+            public string? ExpansionString { get; set; }
 
 
             public ClassFile(FolderModel? folder, FileModel? fileModels)
@@ -61,6 +63,7 @@ namespace duckDisk.Windows
                     imageTypeIcon = "\\Resources\\FileIcon.png";
                     FileInFolder = false;
                     UriString = fileModels.Url;
+                    ExpansionString = fileModels.Expansion;
                 }
             }
         }
@@ -292,17 +295,25 @@ namespace duckDisk.Windows
 
             SaveFileDialog folderBrowserDialog1 = new SaveFileDialog();
 
+            folderBrowserDialog1.FileName = classFiles[lvMain.SelectedIndex].Name;
+            folderBrowserDialog1.Filter = "All Files (*.*)|*.*";
+
             if (folderBrowserDialog1.ShowDialog() == true)
             {
 
                 MessageBox.Show(folderBrowserDialog1.FileName);
             }
 
+            string UriString = classFiles[lvMain.SelectedIndex].UriString;
+            string puthFileSave = folderBrowserDialog1.FileName;
             Thread thread = new Thread(() =>
             {
-                DownloadFile(classFiles[lvMain.SelectedIndex].UriString, );
+
+                DownloadFile(UriString, puthFileSave);
+
             });
             thread.Start();
+            
         }
 
         public void DownloadFile(string url, string destinationPath)
