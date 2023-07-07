@@ -140,6 +140,7 @@ namespace duckDisk.Windows
 
         private void clBackEnd(object sender, RoutedEventArgs e)
         {
+            selectFolder = null;
             ShowSelectFolder();
         }
 
@@ -188,14 +189,19 @@ namespace duckDisk.Windows
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.DefaultExt = ".txt"; // Required file extension 
             fileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"; // Optional file extensions
-            fileDialog.ShowDialog();
+            
 
             var api = new FileNetworkApi();
-            if (fileDialog != null)
+            
+            if (fileDialog.ShowDialog() == DialogResult)
             {
-                byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
-                api.Add(fileDialog.SafeFileName, buffer, selectFolder);
+                if (fileDialog != null)
+                {
+                    byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
+                    api.Add(fileDialog.SafeFileName, buffer, selectFolder);
+                }
             }
+            
             ShowSelectFolder(selectFolder);
 
         }
