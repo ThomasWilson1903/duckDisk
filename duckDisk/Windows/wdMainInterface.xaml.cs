@@ -69,13 +69,23 @@ namespace duckDisk.Windows
             }
         }
 
+        
+
+
         public bool checkLev = false;
 
         List<ClassFile> classFiles = new List<ClassFile>();
+        List<ClassFile> listSelectFolder;
         public wdMainInterface()
         {
+            /*listSelectFolder = new List<ClassFile>
+            {
+                new ClassFile(){},
+
+            };*/
             InitializeComponent();
             ShowSelectFolder();
+            lvSelectFolder.ItemsSource = listSelectFolder;
         }
 
         int? selectFolder = null;
@@ -189,19 +199,19 @@ namespace duckDisk.Windows
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.DefaultExt = ".txt"; // Required file extension 
             fileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"; // Optional file extensions
-            
+
 
             var api = new FileNetworkApi();
-            
+
             if (fileDialog.ShowDialog() == DialogResult)
             {
-                if (fileDialog != null)
+                if (true)
                 {
                     byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
                     api.Add(fileDialog.SafeFileName, buffer, selectFolder);
                 }
             }
-            
+
             ShowSelectFolder(selectFolder);
 
         }
@@ -313,7 +323,7 @@ namespace duckDisk.Windows
 
             string UriString = classFiles[lvMain.SelectedIndex].UriString;
             string puthFileSave = folderBrowserDialog1.FileName;
-                MessageBox.Show(UriString);
+            MessageBox.Show(UriString);
             Thread thread = new Thread(() =>
             {
 
@@ -355,6 +365,11 @@ namespace duckDisk.Windows
                 // Обработка исключения, если нет связи с сервером или возникают другие ошибки
                 return false;
             }
+        }
+
+        private void lvFolderHandleDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
