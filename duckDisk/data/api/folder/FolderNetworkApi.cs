@@ -19,7 +19,7 @@ namespace duckDisk.data.api.folder
         private readonly HttpClient httpClient = new();
         private readonly LocalStorage localStorage = new();
 
-        public Paging<FolderModel> GetAll(int? folderId = null, int page = 0, int pageSize = 20)
+        public Paging<FolderModel> GetAll(int? folderId = null, bool inBasket = false, int page = 0, int pageSize = 20)
         {
             var token = localStorage.Get<JwtResponseDto>("jwt_response").AccessToken;
 
@@ -29,6 +29,7 @@ namespace duckDisk.data.api.folder
             query["folder_id"] = folderId.ToString();
             query["page"] = page.ToString();
             query["pageSize"] = pageSize.ToString();
+            query["in_basket"] = inBasket.ToString();
             builder.Query = query.ToString();
 
             var url = builder.ToString();
@@ -141,6 +142,29 @@ namespace duckDisk.data.api.folder
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["folder_id"] = folderId.ToString();
             query["name"] = newName.ToString();
+            builder.Query = query.ToString();
+
+            var url = builder.ToString();
+
+            var request = new HttpRequestMessage(HttpMethod.Patch, url);
+
+            request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {token}");
+
+            var reponse = httpClient.SendAsync(request).Result;
+
+            var json = reponse.Content.ReadAsStringAsync().Result;
+
+            return JsonConvert.DeserializeObject<FolderModel>(json);
+        }
+
+        public FolderModel InBasketToFalse(int folderId)
+        {
+            var token = localStorage.Get<JwtResponseDto>("jwt_response").AccessToken;
+
+            var builder = new UriBuilder($"{NetwokConstants.BASE_URL}/folders/in_basket/to_false");
+
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query["folder_id"] = folderId.ToString();
             builder.Query = query.ToString();
 
             var url = builder.ToString();
