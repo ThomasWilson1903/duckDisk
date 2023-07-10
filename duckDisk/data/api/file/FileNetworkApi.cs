@@ -18,7 +18,7 @@ namespace duckDisk.data.api.file
         private readonly HttpClient httpClient = new();
         private readonly LocalStorage localStorage = new();
 
-        public Paging<FileModel> GetAll(int? folderId = null, int page = 0, int pageSize = 20)
+        public Paging<FileModel> GetAll(int? folderId = null, bool inBasket = false, int page = 0, int pageSize = 20)
         {
             var token = localStorage.Get<JwtResponseDto>("jwt_response").AccessToken;
 
@@ -28,6 +28,7 @@ namespace duckDisk.data.api.file
             query["folder_id"] = folderId.ToString();
             query["page"] = page.ToString();
             query["pageSize"] = pageSize.ToString();
+            query["in_basket"] = inBasket.ToString();
             builder.Query = query.ToString();
 
             var url = builder.ToString();
