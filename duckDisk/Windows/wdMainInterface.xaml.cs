@@ -2,6 +2,7 @@
 using duckDisk.data.api.file.model;
 using duckDisk.data.api.folder;
 using duckDisk.data.api.folder.model;
+using duckDisk.data.api.user;
 using duckDisk.Windows.wdCreateItem;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows;
@@ -199,20 +201,24 @@ namespace duckDisk.Windows
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.DefaultExt = ".txt"; // Required file extension 
             fileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"; // Optional file extensions
+            fileDialog.ShowDialog();
+            
 
-
-            var api = new FileNetworkApi();
-
-            if (fileDialog.ShowDialog() == DialogResult)
+            if (fileDialog.FileName != "")
             {
-                if (true)
+            var api = new FileNetworkApi();
+            {
+                if (fileDialog != null)
                 {
                     byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
                     api.Add(fileDialog.SafeFileName, buffer, selectFolder);
                 }
             }
 
+            }
+
             ShowSelectFolder(selectFolder);
+
 
         }
 
@@ -324,11 +330,13 @@ namespace duckDisk.Windows
             string UriString = classFiles[lvMain.SelectedIndex].UriString;
             string puthFileSave = folderBrowserDialog1.FileName;
             MessageBox.Show(UriString);
+
+            var userApi = new UserNetworkApi();
+
+
             Thread thread = new Thread(() =>
             {
-
                 DownloadFile(UriString, puthFileSave);
-
             });
             thread.Start();
 
@@ -338,6 +346,10 @@ namespace duckDisk.Windows
         {
             using (WebClient client = new WebClient())
             {
+                var userApi = new UserNetworkApi();
+
+                client.Headers.Add("Authorization", $"Bearer {userApi.GetLocalJwtResponse().AccessToken}");
+
                 if (FileExists(url))
                 {
                     client.DownloadFile(url, destinationPath);
@@ -352,7 +364,9 @@ namespace duckDisk.Windows
         {
             try
             {
+                var userApi = new UserNetworkApi();
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Headers.Add("Authorization", $"Bearer {userApi.GetLocalJwtResponse().AccessToken}");
                 request.Method = "HEAD";
 
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
