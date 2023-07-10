@@ -155,5 +155,28 @@ namespace duckDisk.data.api.folder
 
             return JsonConvert.DeserializeObject<FolderModel>(json);
         }
+
+        public FolderModel InBasketToFalse(int folderId)
+        {
+            var token = localStorage.Get<JwtResponseDto>("jwt_response").AccessToken;
+
+            var builder = new UriBuilder($"{NetwokConstants.BASE_URL}/folders/in_basket/to_false");
+
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query["folder_id"] = folderId.ToString();
+            builder.Query = query.ToString();
+
+            var url = builder.ToString();
+
+            var request = new HttpRequestMessage(HttpMethod.Patch, url);
+
+            request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {token}");
+
+            var reponse = httpClient.SendAsync(request).Result;
+
+            var json = reponse.Content.ReadAsStringAsync().Result;
+
+            return JsonConvert.DeserializeObject<FolderModel>(json);
+        }
     }
 }
