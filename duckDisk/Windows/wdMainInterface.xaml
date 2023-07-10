@@ -25,18 +25,32 @@
             <ColumnDefinition Width="850*"/>
         </Grid.ColumnDefinitions>
 
-        
+
         <Grid Grid.Column="0" Background="#425559">
-            <StackPanel Margin="0 10 0 0">
-                <Button Click="clOpenImage">
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Image"/>
-                            <TextBlock Text="Фото"/>
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
-            </StackPanel>
+            <Border Padding="10" Background="#FFFFFF" Margin="10" VerticalAlignment="Top"
+                    CornerRadius="10">
+
+                <StackPanel Margin="0 10 0 0">
+                    <TextBlock Text="Избранное" Margin="5 0 0 5" FontSize="24"/>
+                    <ListView x:Name="lvSelectFolder" Height="300">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="Margin"  Value="5"/>
+                                <EventSetter Event='MouseDoubleClick' Handler='lvFolderHandleDoubleClick'/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Folder" Foreground="#FFD464"/>
+                                    <TextBlock Text="{Binding NameFolder}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Border>
 
             <Button VerticalAlignment="Bottom" Click="clExitSystem" HorizontalAlignment="Left" Margin="10 10" >
                 <Button.Content>
@@ -46,6 +60,7 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
+
         </Grid>
         <Grid Grid.Column="1">
             <Image Source="/Resources/Fon.png" Stretch="Uniform" VerticalAlignment="Top"/>
@@ -101,6 +116,7 @@
                                 <MenuItem Header="Создать">
                                     <MenuItem Header="Папку" Click="MenuItemCreate_Click"/>
                                 </MenuItem>
+                                <MenuItem Header="Скачать" Click="MenuItemDowload_Click"/>
                                 <MenuItem Header="Переименовать" Click="MenuItemRename_Click"/>
                                 <MenuItem Header="Удалить" Click="MenuItemDelete_Click"/>
                             </ContextMenu>

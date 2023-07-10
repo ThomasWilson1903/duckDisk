@@ -2,28 +2,17 @@
 using duckDisk.data.api.file.model;
 using duckDisk.data.api.folder;
 using duckDisk.data.api.folder.model;
+using duckDisk.Windows.wdCreateItem;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
-using Path = System.IO.Path;
-using System.IO.Compression;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading;
-using MaterialDesignThemes.Wpf;
-using duckDisk.Windows.wdCreateItem;
+using System.Windows;
+using System.Windows.Input;
 
 namespace duckDisk.Windows
 {
@@ -53,6 +42,10 @@ namespace duckDisk.Windows
 
             public Boolean FileInFolder { get; set; }
 
+            public string UriString { get; set; }
+
+            public string? ExpansionString { get; set; }
+
 
             public ClassFile(FolderModel? folder, FileModel? fileModels)
             {
@@ -70,18 +63,29 @@ namespace duckDisk.Windows
                     Name = fileModels.Name;
                     imageTypeIcon = "\\Resources\\FileIcon.png";
                     FileInFolder = false;
-
+                    UriString = fileModels.Url;
+                    ExpansionString = fileModels.Expansion;
                 }
             }
         }
 
+        
+
+
         public bool checkLev = false;
 
         List<ClassFile> classFiles = new List<ClassFile>();
+        List<ClassFile> listSelectFolder;
         public wdMainInterface()
         {
+            /*listSelectFolder = new List<ClassFile>
+            {
+                new ClassFile(){},
+
+            };*/
             InitializeComponent();
             ShowSelectFolder();
+            lvSelectFolder.ItemsSource = listSelectFolder;
         }
 
         int? selectFolder = null;
@@ -146,6 +150,7 @@ namespace duckDisk.Windows
 
         private void clBackEnd(object sender, RoutedEventArgs e)
         {
+            selectFolder = null;
             ShowSelectFolder();
         }
 
@@ -194,14 +199,19 @@ namespace duckDisk.Windows
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.DefaultExt = ".txt"; // Required file extension 
             fileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"; // Optional file extensions
-            fileDialog.ShowDialog();
+
 
             var api = new FileNetworkApi();
-            if (fileDialog != null)
+
+            if (fileDialog.ShowDialog() == DialogResult)
             {
-                byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
-                api.Add(fileDialog.SafeFileName, buffer, selectFolder);
+                if (true)
+                {
+                    byte[] buffer = File.ReadAllBytes(fileDialog.FileName);
+                    api.Add(fileDialog.SafeFileName, buffer, selectFolder);
+                }
             }
+
             ShowSelectFolder(selectFolder);
 
         }
@@ -294,6 +304,72 @@ namespace duckDisk.Windows
 
 
             }
+        }
+
+        private void MenuItemDowload_Click(object sender, RoutedEventArgs e)
+        {
+            string parameter = "Hello, World!";
+
+            SaveFileDialog folderBrowserDialog1 = new SaveFileDialog();
+
+            folderBrowserDialog1.FileName = classFiles[lvMain.SelectedIndex].Name;
+            folderBrowserDialog1.Filter = "All Files (*.*)|*.*";
+
+            if (folderBrowserDialog1.ShowDialog() == true)
+            {
+
+                MessageBox.Show(folderBrowserDialog1.FileName);
+            }
+
+            string UriString = classFiles[lvMain.SelectedIndex].UriString;
+            string puthFileSave = folderBrowserDialog1.FileName;
+            MessageBox.Show(UriString);
+            Thread thread = new Thread(() =>
+            {
+
+                DownloadFile(UriString, puthFileSave);
+
+            });
+            thread.Start();
+
+        }
+
+        public void DownloadFile(string url, string destinationPath)
+        {
+            using (WebClient client = new WebClient())
+            {
+                if (FileExists(url))
+                {
+                    client.DownloadFile(url, destinationPath);
+                }
+                else
+                {
+                    MessageBox.Show("Файл отсутствует на сервере или возникают другие ошибки.", "Error");
+                }
+            }
+        }
+        public static bool FileExists(string url)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "HEAD";
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    return response.StatusCode == HttpStatusCode.OK;
+                }
+            }
+            catch (WebException)
+            {
+                // Обработка исключения, если нет связи с сервером или возникают другие ошибки
+                return false;
+            }
+        }
+
+        private void lvFolderHandleDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
