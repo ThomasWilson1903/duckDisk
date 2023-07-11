@@ -109,5 +109,35 @@ namespace duckDisk.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] link {
+            get {
+                object obj = ResourceManager.GetObject("link", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] LinkBorder {
+            get {
+                object obj = ResourceManager.GetObject("LinkBorder", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] linkW {
+            get {
+                object obj = ResourceManager.GetObject("linkW", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

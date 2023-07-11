@@ -63,7 +63,9 @@
 
         </Grid>
         <Grid Grid.Column="1">
-            <Image Source="/Resources/Fon.png" Stretch="Uniform" VerticalAlignment="Top"/>
+            <Image Source="/Resources/Fon.png" Stretch="Uniform" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                
+            </Image>
 
             <Border Margin="30" CornerRadius="10" Padding="10">
                 <Border.Background>
@@ -117,6 +119,7 @@
                                     <MenuItem Header="Папку" Click="MenuItemCreate_Click"/>
                                 </MenuItem>
                                 <MenuItem Header="Скачать" Click="MenuItemDowload_Click"/>
+                                <MenuItem Header="Поделится" Click="MenuItemEditPublick_Click"/>
                                 <MenuItem Header="Переименовать" Click="MenuItemRename_Click"/>
                                 <MenuItem Header="Удалить" Click="MenuItemDelete_Click"/>
                             </ContextMenu>
@@ -144,10 +147,21 @@
                                         <Grid Height="150" 
                                       Width="150">
                                             <Image  Width="100" Height="100"
-                                            Source="{Binding imageTypeIcon}"/>
+                                            Source="{Binding imageTypeIcon}">
+                                                
+                                            </Image>
                                         </Grid>
                                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" Margin=" 0 20 0 0 " FontSize="14" Foreground="#000000"/>
                                     </StackPanel>
+                                    <Border CornerRadius="360" Margin="90 90"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Height="60" Width="60">
+
+                                        <Image Source="{Binding isPublic}" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 ">
+                                           
+                                        </Image>
+                                    </Border>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>

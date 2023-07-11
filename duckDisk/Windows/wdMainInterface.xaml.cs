@@ -4,6 +4,7 @@ using duckDisk.data.api.folder;
 using duckDisk.data.api.folder.model;
 using duckDisk.data.api.user;
 using duckDisk.Windows.wdCreateItem;
+using duckDisk.Windows.wdPublic;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using System;
@@ -42,22 +43,32 @@ namespace duckDisk.Windows
 
             public string? imageTypeIcon { get; set; }
 
-            public Boolean FileInFolder { get; set; }
+            public bool FileInFolder { get; set; }
 
             public string UriString { get; set; }
 
             public string? ExpansionString { get; set; }
 
+            public string? isPublic { get; set; }
+
+            public bool isPublicBool { get; set; }
+
 
             public ClassFile(FolderModel? folder, FileModel? fileModels)
             {
+
                 if (folder != null)
                 {
                     Id = folder.Id;
                     Name = folder.Name;
                     imageTypeIcon = folder.getIcon();
                     FileInFolder = true;
-
+                    isPublicBool = folder.IsPublic;
+                    if (folder.IsPublic)
+                    {
+                        isPublic = "\\Resources\\LinkBorder.png";
+                    }
+                    
                 }
                 else
                 {
@@ -67,6 +78,11 @@ namespace duckDisk.Windows
                     FileInFolder = false;
                     UriString = fileModels.Url;
                     ExpansionString = fileModels.Expansion;
+                    isPublicBool = fileModels.IsPublic;
+                    if (fileModels.IsPublic)
+                    {
+                        isPublic = "\\Resources\\LinkBorder.png";
+                    }
                 }
             }
         }
@@ -383,6 +399,13 @@ namespace duckDisk.Windows
 
         private void lvFolderHandleDoubleClick(object sender, MouseButtonEventArgs e)
         {
+
+        }
+
+        private void MenuItemEditPublick_Click(object sender, RoutedEventArgs e)
+        {
+            new wdEditPublic(classFiles[lvMain.SelectedIndex].UriString, classFiles[lvMain.SelectedIndex].Id,
+                classFiles[lvMain.SelectedIndex].isPublicBool).ShowDialog();
 
         }
     }

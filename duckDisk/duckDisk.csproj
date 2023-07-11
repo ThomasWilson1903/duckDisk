@@ -14,6 +14,9 @@
     <None Remove="Resources\folderIcon.png" />
     <None Remove="Resources\Fon.png" />
     <None Remove="Resources\fonAuth.jpg" />
+    <None Remove="Resources\link.png" />
+    <None Remove="Resources\LinkBorder.png" />
+    <None Remove="Resources\linkW.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +34,9 @@
     <Resource Include="Resources\folderIcon.png" />
     <Resource Include="Resources\Fon.png" />
     <Resource Include="Resources\fonAuth.jpg" />
+    <Resource Include="Resources\link.png" />
+    <Resource Include="Resources\LinkBorder.png" />
+    <Resource Include="Resources\linkW.png" />
   </ItemGroup>
 
   <ItemGroup>
