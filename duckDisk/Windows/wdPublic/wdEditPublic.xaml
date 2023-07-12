@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:duckDisk.Windows.wdPublic"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         Background="Transparent" AllowsTransparency="True"
-        mc:Ignorable="d" WindowStyle="None"
+        mc:Ignorable="d" WindowStyle="None" FontSize="20"
         Title="wdEditPublic" Height="450" Width="800">
 
     <Window.Resources>
@@ -28,10 +28,25 @@
         </Border.Effect>
         <Grid Background="Transparent">
             
+                    <TextBlock Text="Поделится файлом" Margin="15 15"/>
 
-            <StackPanel VerticalAlignment="Center">
-                <TextBox x:Name="tbUrl"/>
-                <Button Content="Скопировать ссылку" Click="clCopy"/>
+            <StackPanel VerticalAlignment="Center" Margin="20 0">
+                <TextBlock Text="Ссылка на скачивание файла"/>
+                <TextBox x:Name="tbUrl" Margin="0 5 0 0" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button 
+                        Margin="0 5 0 0" Click="clCopy">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon VerticalAlignment="Center"
+                                                         Kind="Link"/>
+                                <TextBlock Text="Скопировать ссылку" FontSize="16" Margin="5 0 0 0"/>
+                            </StackPanel> 
+                        </Button.Content>
+                    </Button>
+                    
+                </StackPanel>
             </StackPanel>
             <Border Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10 10" MouseDown="kdWdClose">
                 <materialDesign:PackIcon Kind="Close"/>
