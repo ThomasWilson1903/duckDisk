@@ -26,8 +26,8 @@ namespace duckDisk.Pages.wdAuthAndRegisterMain
         {
             InitializeComponent();
             tbLogin.Focus();
-            tbLogin.Text = "string";
-            pbPassword.Password = "string";
+            tbLogin.Text = "hdnhdxv@mail.ru";
+            pbPassword.Password = "6571Ssss";
         }
 
         private void clAuthEnterSystem(object sender, RoutedEventArgs e)
