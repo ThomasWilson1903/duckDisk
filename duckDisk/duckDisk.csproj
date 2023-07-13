@@ -5,7 +5,7 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>IconLogo.ico</ApplicationIcon>
+    <ApplicationIcon>Group-4.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="IconLogo.ico" />
+    <Content Include="Group-4.ico" />
   </ItemGroup>
 
   <ItemGroup>

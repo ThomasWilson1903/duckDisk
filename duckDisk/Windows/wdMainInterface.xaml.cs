@@ -215,8 +215,8 @@ namespace duckDisk.Windows
         private void clAddFile(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.DefaultExt = ".txt"; // Required file extension 
-            fileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"; // Optional file extensions
+            fileDialog.DefaultExt = "*.*"; // Required file extension 
+            fileDialog.Filter = "All files (*.*)|*.*"; // Optional file extensions
             fileDialog.ShowDialog();
             
 
@@ -330,7 +330,7 @@ namespace duckDisk.Windows
 
         private void MenuItemDowload_Click(object sender, RoutedEventArgs e)
         {
-            string parameter = "Hello, World!";
+            
 
             SaveFileDialog folderBrowserDialog1 = new SaveFileDialog();
 
