@@ -26,8 +26,8 @@ namespace duckDisk.Pages.wdAuthAndRegisterMain
         {
             InitializeComponent();
             tbLogin.Focus();
-            tbLogin.Text = "hdnhdxv@mail.ru";
-            pbPassword.Password = "6571Ssss";
+            tbLogin.Text = "string";
+            pbPassword.Password = "string";
         }
 
         private void clAuthEnterSystem(object sender, RoutedEventArgs e)
@@ -42,8 +42,8 @@ namespace duckDisk.Pages.wdAuthAndRegisterMain
 
             if (respons.AccessToken != "")
             {
-                Application.Current.MainWindow.Hide();
                 var openWd = new wdMainInterface();
+                Application.Current.MainWindow.Hide();
                 openWd.ShowDialog();
                 if (openWd.checkLev)
                 {

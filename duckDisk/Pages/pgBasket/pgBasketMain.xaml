@@ -1,0 +1,67 @@
+﻿<Page x:Class="duckDisk.Pages.pgBasket.pgBasketMain"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:duckDisk.Pages.pgBasket"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgBasketMain"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+      >
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Indigo"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center" Height="24"/>
+                <TextBlock Text="Корзина" FontSize="24" Margin="10 0"/>
+
+            </StackPanel>
+            <Button Width="48" HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="OpenInNew"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+        <!--
+            
+            <ListView x:Name="lvSelectBasket" Height="300">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="Margin"  Value="5"/>
+                        <EventSetter Event='MouseDoubleClick' Handler='lvFolderHandleDoubleClick'/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Folder" Foreground="#FFD464"/>
+                            <TextBlock Text="{Binding NameFolder}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            -->
+        <DataGrid Grid.Row="1" x:Name="dgTest"/>
+
+        <Button Grid.Row="2" Click="ButtonDelAll_Click"/>
+    </Grid>
+</Page>

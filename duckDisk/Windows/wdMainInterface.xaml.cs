@@ -3,6 +3,7 @@ using duckDisk.data.api.file.model;
 using duckDisk.data.api.folder;
 using duckDisk.data.api.folder.model;
 using duckDisk.data.api.user;
+using duckDisk.Pages.pgBasket;
 using duckDisk.Windows.wdCreateItem;
 using duckDisk.Windows.wdPublic;
 using MaterialDesignThemes.Wpf;
@@ -94,6 +95,9 @@ namespace duckDisk.Windows
 
         List<ClassFile> classFiles = new List<ClassFile>();
         List<ClassFile> listSelectFolder;
+        int? selectFolder = null;
+
+        string? selectFolderName = null;
         public wdMainInterface()
         {
             /*listSelectFolder = new List<ClassFile>
@@ -103,12 +107,14 @@ namespace duckDisk.Windows
             };*/
             InitializeComponent();
             ShowSelectFolder();
+            ShowSelectPgBasket();
             lvSelectFolder.ItemsSource = listSelectFolder;
         }
 
-        int? selectFolder = null;
-
-        string? selectFolderName = null;
+        void ShowSelectPgBasket()
+        {
+            frBasket.Navigate(new pgBasketMain());
+        }
 
         void ShowSelectFolder(int? folder = null)
         {
