@@ -14,5 +14,19 @@ namespace duckDisk.data.api.file.model
         public DateTime DateCreate { get; set; }
         public Boolean IsPublic { get; set; }
         public User User { get; set; } = new();
+
+        private string typePath = "\\Resources\\FileIcon.png";
+
+        private string isPublic = "\\Resources\\LinkBorder.png";
+
+        public string getTypePath()
+        {
+            return typePath;
+        }
+
+        public string getIsPublic()
+        {
+            return isPublic;
+        }
     }
 }

@@ -67,7 +67,7 @@ namespace duckDisk.Windows
                     isPublicBool = folder.IsPublic;
                     if (folder.IsPublic)
                     {
-                        isPublic = "\\Resources\\LinkBorder.png";
+                        isPublic = folder.getIsPublic();
                     }
                     
                 }
@@ -75,14 +75,14 @@ namespace duckDisk.Windows
                 {
                     Id = fileModels.Id;
                     Name = fileModels.Name;
-                    imageTypeIcon = "\\Resources\\FileIcon.png";
+                    imageTypeIcon = fileModels.getTypePath();
                     FileInFolder = false;
                     UriString = fileModels.Url;
                     ExpansionString = fileModels.Expansion;
                     isPublicBool = fileModels.IsPublic;
                     if (fileModels.IsPublic)
                     {
-                        isPublic = "\\Resources\\LinkBorder.png";
+                        isPublic = fileModels.getIsPublic();
                     }
                 }
             }

@@ -17,9 +17,15 @@ namespace duckDisk.data.api.folder.model
         //TODO: Сделать гетер
         private string imageTypeIcon = "\\Resources\\folderIcon.png";
 
+        private string isPublic = "\\Resources\\LinkBorder.png";
+
         public string getIcon()
         {
             return imageTypeIcon;
+        }
+        public string getIsPublic()
+        {
+            return isPublic;
         }
     }
 }
