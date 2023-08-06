@@ -167,8 +167,6 @@ namespace duckDisk.Windows
                 {
                     ShowSelectFolder(classFiles[lvMain.SelectedIndex].Id);
                 }
-                else
-                    MessageBox.Show("download");
             }
         }
 
